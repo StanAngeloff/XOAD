@@ -1,7 +1,5 @@
-README
--------
-
-NOTE on XOAD license:
+NOTE on XOAD's license:
+----------------------
 
 Essentially, the license gives you the right to use, distribute and modify
 XOAD as much as you want, for both COMMERCIAL and NON-COMMERCIAL use. You

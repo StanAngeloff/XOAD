@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+	<head>
+		<title>XOAD HTML Questions &amp; Answers</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css" media="screen">
+			@import url(style/default.css);
+		</style>
+	</head>
+	<body>
+		<h1>XOAD HTML Questions &amp; Answers</h1>
+		<p>
+			This tutorial assumes that you've read <a href="1-page-skeleton.html">XOAD Page
+				Skeleton</a>.
+		</p>
+		<h2>What's XOAD HTML?</h2>
+		<p>
+			XOAD HTML is an extension that allows you to update the content and
+			the style of a page. The best way to start using XOAD HTML is to
+			show you a basic example. Take a look at this JavaScript code that
+			updates a DIV element:
+		</p>
+		<pre id="demo1">
+&lt;div id=&quot;container&quot;&gt;Text...&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+	function update()
+	{
+		var container = document.getElementById('container');
+
+		container.innerHTML = 'Other text...';
+		container.style.color = 'red';
+	}
+
+&lt;/script&gt;
+&lt;a href=&quot;#server&quot; onclick=&quot;update(); return false;&quot;&gt;Update&lt;/a&gt;
+</pre>
+		<p>
+			Here is the above example, but this time using XOAD HTML:
+		</p>
+<pre>
+&lt;?php
+
+class Example
+{
+	function update()
+	{
+		<strong>// Note the '&amp;' operator.</strong>
+		$container =<strong>&amp;</strong> <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#getElementById">getElementById</a>('container');
+
+		$container-&gt;innerHTML = 'Other text...';
+		$container-&gt;style['color'] = 'red';
+	}
+}
+
+define('XOAD_AUTOHANDLE', true);
+
+<a href="http://bg.php.net/require_once">require_once</a>('xoad.php');
+
+?&gt;
+&lt;?= <a href="../source/XOAD/XOAD_Utilities.html">XOAD_Utilities</a>::<a href="../source/XOAD/XOAD_Utilities.html#header">header</a>('.') . &quot;\n&quot; ?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var obj = &lt;?= <a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a>(new Example()) ?&gt;;
+
+&lt;/script&gt;
+
+&lt;div id=&quot;container&quot;&gt;Text...&lt;/div&gt;
+&lt;a href=&quot;#server&quot; onclick=&quot;obj.update(); return false;&quot;&gt;Update&lt;/a&gt;
+</pre>
+		<p>
+			We have a class that is exported using <code><a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a></code>
+			(if you still haven't read <a href="1-page-skeleton.html">XOAD Page Skeleton</a>
+			go back and do it). This class has only one method <code>update</code>
+			that takes no arguments and updates the DIV element. As you can see
+			HTML manipulation is quite easy using XOAD HTML.
+		</p>
+		<p>
+			This tutorial is a bit different. It'll be organized as series of
+			Questions and Answers. Let's get started.
+		</p>
+		<h3>Q: How to change the background color of all links?</h3>
+		<p>
+			<strong>A</strong>: Use <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#getElementsByTagName">getElementsByTagName</a>.
+		</p>
+<pre>
+&lt;?php
+
+class Example
+{
+	function update()
+	{
+		$links =<strong>&amp;</strong> <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#getElementsByTagName">getElementsByTagName</a>('a');
+
+		$links-&gt;style['backgroundColor'] = 'yellow';
+	}
+}
+
+define('XOAD_AUTOHANDLE', true);
+
+<a href="http://bg.php.net/require_once">require_once</a>('xoad.php');
+
+?&gt;
+&lt;?= <a href="../source/XOAD/XOAD_Utilities.html">XOAD_Utilities</a>::<a href="../source/XOAD/XOAD_Utilities.html#header">header</a>('.') . &quot;\n&quot; ?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var obj = &lt;?= <a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a>(new Example()) ?&gt;;
+
+&lt;/script&gt;
+
+&lt;ul class=&quot;resources&quot;&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/news/&quot;&gt;News&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/documentation/source/&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/tutorials/&quot;&gt;Tutorials&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/examples/&quot;&gt;Examples&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=2&quot;&gt;Bugs&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=3&quot;&gt;Support Requests&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=4&quot;&gt;Feature Requests&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=6&quot;&gt;Public Forums&lt;/a&gt;&lt;/li&gt;
+	&lt;li class=&quot;php-books&quot;&gt;&lt;a href=&quot;http://www.very-clever.com/books/php&quot;&gt;&lt;strong&gt;PHP books&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href=&quot;#server&quot; onclick=&quot;obj.update(); return false;&quot;&gt;Update&lt;/a&gt;
+</pre>
+		<h3>Q: How to disable a group of radio buttons?</h3>
+		<p>
+			<strong>A</strong>: Use <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#getElementsByName">getElementsByName</a>.
+		</p>
+<pre>
+&lt;?php
+
+class Example
+{
+	function update()
+	{
+		$something =<strong>&amp;</strong> <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#getElementsByName">getElementsByName</a>('something');
+
+		$something-&gt;<a href="../source/XOAD/XOAD_HTML/XOAD_HTML_DOM_BaseElement.html#setAttribute">setAttribute</a>('disabled', true);
+	}
+}
+
+define('XOAD_AUTOHANDLE', true);
+
+<a href="http://bg.php.net/require_once">require_once</a>('xoad.php');
+
+?&gt;
+&lt;?= <a href="../source/XOAD/XOAD_Utilities.html">XOAD_Utilities</a>::<a href="../source/XOAD/XOAD_Utilities.html#header">header</a>('.') . &quot;\n&quot; ?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var obj = &lt;?= <a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a>(new Example()) ?&gt;;
+
+&lt;/script&gt;
+
+&lt;form action=&quot;#&quot; method=&quot;post&quot;&gt;
+	&lt;fieldset&gt;
+		&lt;legend&gt;Choose something:&lt;/legend&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;choice-1&quot; name=&quot;something&quot; /&gt;&lt;label for=&quot;choice-1&quot;&gt;Choice 1&lt;/label&gt;&lt;br /&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;choice-2&quot; name=&quot;something&quot; /&gt;&lt;label for=&quot;choice-2&quot;&gt;Choice 2&lt;/label&gt;&lt;br /&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;choice-3&quot; name=&quot;something&quot; checked=&quot;checked&quot; /&gt;&lt;label for=&quot;choice-3&quot;&gt;Choice 3&lt;/label&gt;&lt;br /&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;choice-4&quot; name=&quot;something&quot; /&gt;&lt;label for=&quot;choice-4&quot;&gt;Choice 4&lt;/label&gt;&lt;br /&gt;
+		&lt;input type=&quot;radio&quot; id=&quot;choice-5&quot; name=&quot;something&quot; /&gt;&lt;label for=&quot;choice-5&quot;&gt;Choice 5&lt;/label&gt;
+	&lt;/fieldset&gt;
+&lt;/form&gt;
+
+&lt;a href=&quot;#server&quot; onclick=&quot;obj.update(); return false;&quot;&gt;Update&lt;/a&gt;
+</pre>
+		<h3>Q: How to display an alert box?</h3>
+		<p>
+			<strong>A</strong>: Use <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>.
+		</p>
+<pre>
+&lt;?php
+
+class Example
+{
+	function alert()
+	{
+		<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert(&quot;Some text here...&quot;);');
+	}
+}
+
+define('XOAD_AUTOHANDLE', true);
+
+<a href="http://bg.php.net/require_once">require_once</a>('xoad.php');
+
+?&gt;
+&lt;?= <a href="../source/XOAD/XOAD_Utilities.html">XOAD_Utilities</a>::<a href="../source/XOAD/XOAD_Utilities.html#header">header</a>('.') . &quot;\n&quot; ?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var obj = &lt;?= <a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a>(new Example()) ?&gt;;
+
+&lt;/script&gt;
+
+&lt;a href=&quot;#server&quot; onclick=&quot;obj.alert(); return false;&quot;&gt;Alert&lt;/a&gt;
+</pre>
+		<p>
+			Note that the script must end with semicolon. This will not work:
+		</p>
+<pre>
+<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert(&quot;Some text here...&quot;)');
+<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert(&quot;Other text here...&quot;)');
+</pre>
+		<p>
+			This will work (note the semicolons at the end of each line):
+		</p>
+<pre>
+<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert(&quot;Some text here...&quot;)<strong>;</strong>');
+<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert(&quot;Other text here...&quot;)<strong>;</strong>');
+</pre>
+		<p>
+			<strong>Tip</strong>: <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>
+			returns a reference to an object representing the script block. You can change the
+			block contents:
+		</p>
+<pre>
+$block =<strong>&amp;</strong> <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#addScriptBlock">addScriptBlock</a>('alert("Some text here...");');
+
+$block->script = 'alert("Changed text...");';
+</pre>
+		<h3>Q: How to change the color of all links inside a list, having 'rel=external'?</h3>
+		<p>
+			<strong>A</strong>: Use <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#cssQuery">cssQuery</a> (<strong>will be available in 0.6.0.0</strong>).
+		</p>
+<pre>
+&lt;?php
+
+class Example
+{
+	function update()
+	{
+		$links =<strong>&amp;</strong> <a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a>::<a href="../source/XOAD/XOAD_HTML/XOAD_HTML.html#cssQuery">cssQuery</a>('ul li a[rel=&quot;external&quot;]');
+
+		$links-&gt;style['color'] = 'red';
+	}
+}
+
+define('XOAD_AUTOHANDLE', true);
+
+<a href="http://bg.php.net/require_once">require_once</a>('xoad.php');
+
+?&gt;
+&lt;?= <a href="../source/XOAD/XOAD_Utilities.html">XOAD_Utilities</a>::<a href="../source/XOAD/XOAD_Utilities.html#header">header</a>('.') . &quot;\n&quot; ?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var obj = &lt;?= <a href="../source/XOAD/XOAD_Client.html">XOAD_Client</a>::<a href="../source/XOAD/XOAD_Client.html#register">register</a>(new Example()) ?&gt;;
+
+&lt;/script&gt;
+
+&lt;ul class=&quot;resources&quot;&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/news/&quot;&gt;News&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/documentation/source/&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/tutorials/&quot;&gt;Tutorials&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.xoad.org/examples/&quot;&gt;Examples&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=2&quot; rel=&quot;external&quot;&gt;Bugs&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=3&quot; rel=&quot;external&quot;&gt;Support Requests&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=4&quot; rel=&quot;external&quot;&gt;Feature Requests&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://forums.xoad.org/viewforum.php?id=6&quot; rel=&quot;external&quot;&gt;Public Forums&lt;/a&gt;&lt;/li&gt;
+	&lt;li class=&quot;php-books&quot;&gt;&lt;a href=&quot;http://www.very-clever.com/books/php&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;PHP books&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href=&quot;#server&quot; onclick=&quot;obj.update(); return false;&quot;&gt;Update&lt;/a&gt;
+</pre>
+		<h3>Q: How to pass form values from/to the server?</h3>
+		<p>
+			<strong>A</strong>: Take a look at the <a href="http://demo.xoad.org/examples/forms/">Forms</a>
+			example. The full source code is available in the <a href="http://sourceforge.net/project/showfiles.php?group_id=150102&amp;package_id=165780">ZIP package</a>.
+		</p>
+		<h2>Final Words</h2>
+		<p>
+			This tutorial will be constantly updated. If you have any questions
+			or would like to discuss the tutorial feel free to do it in the
+			<a href="http://forums.xoad.org/viewforum.php?id=9">forums</a>.
+		</p>
+		<p>
+			Happy coding.
+		</p>
+		<p>
+			<img src="images/xoad-logo-draft.gif" width="180" height="80" alt="XOAD Logo" />
+		</p>
+	</body>
+</html>

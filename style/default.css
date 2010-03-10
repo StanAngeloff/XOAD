@@ -1,0 +1,91 @@
+body
+{
+	background-color: #fff;
+	color: #000;
+	font: normal 0.85em tahoma, verdana, arial, serif;
+	margin: 0;
+	padding: 1em;
+}
+
+h1
+{
+	border-bottom: 0.1em solid #e0e0e0;
+	font-size: 2em;
+}
+
+h2
+{
+	border-bottom: 0.1em solid #efefef;
+	font-size: 1.5em;
+}
+
+h3
+{
+	border-bottom: 0.1em solid #efefef;
+	font-size: 1.25em;
+}
+
+p
+{
+	line-height: 1.5em;
+}
+
+ins
+{
+	text-decoration: none;
+}
+
+dfn
+{
+	font-size: 0.8em;
+	font-style: normal;
+}
+
+code
+{
+	background-color: #f7f7f7;
+	font-size: 1em;
+}
+
+pre
+{
+	background-color: #efefef;
+	border: 0.1em solid #ccc;
+	font-size: 1em;
+	padding: 1em;
+}
+
+pre strong
+{
+	color: #600;
+}
+
+a
+{
+	color: #008;
+	text-decoration: underline;
+}
+
+a:hover
+{
+	color: #00c;
+	text-decoration: underline;
+}
+
+a:active
+{
+	color: #00f;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #080;
+	text-decoration: underline;
+}
+
+.figure
+{
+	font-size: 0.8em;
+	text-align: center;
+}

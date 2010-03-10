@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class XOAD_Cache</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> XOAD_Cache</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XOAD_Cache Class.</p>
+<p class="description"><p>This class allows you to cache the callbacks to  the server. By default the caching is disabled and  you must call XOAD_Cache::allowCaching to  configure which classes and methods will be cached.</p><p>Example:</p><p><pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-id"><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html#methodallowCaching">allowCaching</a><span class="src-sym">(</span><span class="src-str">'ExampleClass'</span><span class="src-sym">, </span><span class="src-str">'invokeMethod'</span><span class="src-sym">, </span><span class="src-num">30</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> 0.6.0.0</li>
+				<li><span class="field">author:</span> Stanimir Angeloff</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_extensions_cache_classes_Cache_class_php.html">/extensions/cache/classes/Cache.class.php</a> (line <span class="field"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a56">56</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#allowCaching" title="details" class="method-name">allowCaching</a>
+											([<span class="var-type">array</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$expire</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$members</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#cacheRequest" title="details" class="method-name">cacheRequest</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">&$response</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#dispatch" title="details" class="method-name">dispatch</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">&$cacheData</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/PrivateMethod.png" alt=" "/>
+											<span class="method-result">object Singleton</span>
+										<a href="#getStorage" title="details" class="method-name">&amp;getStorage</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#initialize" title="details" class="method-name">initialize</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodallowCaching" id="allowCaching"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">allowCaching</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a348">348</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Installs a new caching criteria.</p>
+<p class="description"><p>By default the caching is disabled and you must call this  method to configure which classes and methods will be cached.</p><p>If you call this method with no arguments, caching will be  enabled for all classes and methods.</p><p>When generating the ID for each request the class name, method name  and arguments list is used to build a long string which is later  used for the ID. You can configure <a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a> to include  some of the class variables too.</p><p>Example:</p><p><pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-comm">// Allow caching for all classes.</span></li>
+<li> <span class="src-id"><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html#methodallowCaching">allowCaching</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-comm">// Allow caching only for the 'Example' class.</span></li>
+<li> <span class="src-id"><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html#methodallowCaching">allowCaching</a><span class="src-sym">(</span><span class="src-str">'Example'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-comm">// Allow caching only for the 'Example-&gt;invoke' method.</span></li>
+<li> <span class="src-id"><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html#methodallowCaching">allowCaching</a><span class="src-sym">(</span><span class="src-str">'Example'</span><span class="src-sym">, </span><span class="src-str">'invoke'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-comm">// Allow caching for the 'invoke' method in every class.</span></li>
+<li> <span class="src-id"><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html">XOAD_Cache</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Cache/XOAD_Cache.html#methodallowCaching">allowCaching</a><span class="src-sym">(</span><span class="src-id">null</span><span class="src-sym">, </span><span class="src-str">'invoke'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			allowCaching
+		</span>
+					([<span class="var-type">array</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$expire</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$members</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$className</span><span class="var-description">: The class name filter. This value can be null.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$method</span><span class="var-description">: The method name filter. This value can be null.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$expire</span><span class="var-description">: The lifetime time in seconds for the                                 cached data. This value can be null.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$arguments</span><span class="var-description">: Array that contains the list of arguments to                                 use when generating the request ID. By default                                 each argument is used. This value can be null.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$members</span><span class="var-description">: Array that contains the list of class variables                                 to use when generating the request ID. By                                 default no class variables are used. This value                                 can be null.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcacheRequest" id="cacheRequest"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">cacheRequest</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a278">278</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method is called when the request matches the configurated  criterias for caching, but there is no data in the cache.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if the request is cached, false otherwise.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			cacheRequest
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">&$response</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$request</span><span class="var-description">: The data that is associated with the                                 callback.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$response</span><span class="var-description">: The data that is associated with the                                 response.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methoddispatch" id="dispatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">dispatch</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a185">185</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method is called when the request matches the configurated criterias for caching.</p>
+<p class="description"><p>If the request is cached and it's not expired then the cached  response is used, otherwise the server dispatches the call  and the response is cached.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if the request is cached, false otherwise.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			dispatch
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">&$cacheData</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$request</span><span class="var-description">: The data that is associated with the                                 callback.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$cacheData</span><span class="var-description">: The data that is associated with the                                 caching criteria.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetStorage" id="getStorage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/PrivateMethod.png" />
+		<span class="method-title">getStorage</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a69">69</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Retrieves an instanse to the configurated XOAD_Cache storage provider.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> <a href="../../XOAD/XOAD_Cache/XOAD_Cache_Storage.html">XOAD_Cache_Storage</a> inherited class based                     on the configuration (see <a href="../../XOAD/_config_extensions_config_php.html#defineXOAD_CACHE_STORAGE_DSN">XOAD_CACHE_STORAGE_DSN</a>).</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object Singleton</span>
+		<span class="method-name">
+			&amp;getStorage
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodinitialize" id="initialize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">initialize</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_Cache_extensionscacheclassesCache.class.php.html#a140">140</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method is called on every request to the server.</p>
+<p class="description"><p>If the request matches the configurated criterias for  caching this method will call XOAD_Cache::dispatch.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if the request is cached, false otherwise.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			initialize
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">&$request</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$request</span><span class="var-description">: The data that is associated with the                                 callback.</span>			</li>
+				</ul>
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:23:51 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

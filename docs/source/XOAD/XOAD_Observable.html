@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class XOAD_Observable</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> XOAD_Observable</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XOAD Observable Class.</p>
+<p class="description"><p>This class is used to extend classes with events.</p><p>You should never use this class directly. Rather,  use the classes that extend this class.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> 0.6.0.0</li>
+				<li><span class="field">author:</span> Stanimir Angeloff</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_classes_Observable_class_php.html">/classes/Observable.class.php</a> (line <span class="field"><a href="..//__filesource/fsource_XOAD__classesObservable.class.php.html#a32">32</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XOAD/XOAD_Client.html">XOAD_Client</a>
+					</td>
+					<td>
+											XOAD Client Class.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XOAD/XOAD_Meta.html">XOAD_Meta</a>
+					</td>
+					<td>
+											XOAD Meta Class.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a>
+					</td>
+					<td>
+											XOAD Serializer Class.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XOAD/XOAD_Server.html">XOAD_Server</a>
+					</td>
+					<td>
+											XOAD Server Class.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a>
+					</td>
+					<td>
+											XOAD Utilities Class.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#addObserver" title="details" class="method-name">addObserver</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$observer</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">'XOAD_Observable'</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#notifyObservers" title="details" class="method-name">notifyObservers</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$event</span> = <span class="var-default">'default'</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$arg</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">'XOAD_Observable'</span>])
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodaddObserver" id="addObserver"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">addObserver</span> (line <span class="line-number"><a href="..//__filesource/fsource_XOAD__classesObservable.class.php.html#a41">41</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			addObserver
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$observer</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">'XOAD_Observable'</span>])
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../XOAD/XOAD_Client.html#methodaddObserver">XOAD_Client::addObserver()</a>
+								: Adds a <a href="../XOAD/XOAD_Client.html">XOAD_Client</a> events observer.
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Meta.html#methodaddObserver">XOAD_Meta::addObserver()</a>
+								: Adds a <a href="../XOAD/XOAD_Meta.html">XOAD_Meta</a> events observer.
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Serializer.html#methodaddObserver">XOAD_Serializer::addObserver()</a>
+								: Adds a <a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a> events observer.
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Server.html#methodaddObserver">XOAD_Server::addObserver()</a>
+								: Adds a <a href="../XOAD/XOAD_Server.html">XOAD_Server</a> events observer.
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Utilities.html#methodaddObserver">XOAD_Utilities::addObserver()</a>
+								: Adds a <a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a> events observer.
+							</li>
+				</ul>
+	</div>
+<a name="methodnotifyObservers" id="notifyObservers"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">notifyObservers</span> (line <span class="line-number"><a href="..//__filesource/fsource_XOAD__classesObservable.class.php.html#a79">79</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			notifyObservers
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$event</span> = <span class="var-default">'default'</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$arg</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$className</span> = <span class="var-default">'XOAD_Observable'</span>])
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../XOAD/XOAD_Client.html#methodnotifyObservers">XOAD_Client::notifyObservers()</a>
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Meta.html#methodnotifyObservers">XOAD_Meta::notifyObservers()</a>
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Serializer.html#methodnotifyObservers">XOAD_Serializer::notifyObservers()</a>
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Server.html#methodnotifyObservers">XOAD_Server::notifyObservers()</a>
+							</li>
+					<li>
+				<a href="../XOAD/XOAD_Utilities.html#methodnotifyObservers">XOAD_Utilities::notifyObservers()</a>
+							</li>
+				</ul>
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:27 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

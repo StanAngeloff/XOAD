@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs for page xoad.config.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/config/xoad.config.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+											<a href="#sec-constants">Constants</a>
+										</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XOAD Configuration file.</p>
+<p class="description"><p>This file contains most of the available XOAD  configuration options.</p><p>You can modify this file, but you should be aware  that XOAD is only tested with the default  configuration.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">filesource:</span> <a href="..//__filesource/fsource_XOAD__configxoad.config.php.html">Source Code for this file</a></li>
+				<li><span class="field">version:</span> 0.6.0.0</li>
+				<li><span class="field">author:</span> Stanimir Angeloff</li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+									<span class="disabled">Constants</span>
+											</div>
+		<div class="info-box-body">	
+			<a name="defineXOAD_CLIENT_METADATA_METHOD_NAME"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="../media/images/Constant.png" />
+		<span class="const-title">
+			<span class="const-name">XOAD_CLIENT_METADATA_METHOD_NAME</span> = 'xoadGetMeta'
+			(line <span class="line-number"><a href="..//__filesource/fsource_XOAD__configxoad.config.php.html#a87">87</a></span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines the method name that is called when XOAD needs more information about an object.</p>
+<p class="description"><p>Every class that you will register with <a href="../XOAD/XOAD_Client.html">XOAD_Client</a>  should implement this method to provide more information  about its methods and variables.</p><p>Example:</p><p><pre><ol><code><pre><li> &lt;<span class="src-id">script type</span>=<span class="src-str">&quot;text/javascript&quot;</span>&gt;</li>
+<li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-key">class </span><span class="src-id">MetaExample</span></li>
+<li> <span class="src-sym">{</span></li>
+<li>     <span class="src-key">var </span><span class="src-var">$privateVar</span><span class="src-sym">;</span></li>
+<li>     <span class="src-key">var </span><span class="src-var">$publicVar</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li>     <span class="src-key">function </span><span class="src-id">PrivateMethod</span><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span><span class="src-sym">}</span></li>
+<li>     <span class="src-key">function </span><span class="src-id">PublicMethod</span><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span><span class="src-sym">}</span></li>
+<li>&nbsp;</li>
+<li>     <span class="src-key">function </span><span class="src-id">xoadGetMeta</span><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li>     <span class="src-sym">{</span></li>
+<li>         <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodprivateMethods">privateMethods</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'PrivateMethod'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li>         <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodprivateVariables">privateVariables</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'privateVar'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li>         <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodmapMethods">mapMethods</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'PublicMethod'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li>     <span class="src-sym">}</span></li>
+<li> <span class="src-sym">}</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'xoad.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> print <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-str">'MetaExample'</span><span class="src-sym">, </span><span class="src-str">'server.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+<li> &lt;/script&gt;</li>
+</pre></code></ol></pre></p></p>
+	
+		
+</div>
+<a name="defineXOAD_EVENTS_LIFETIME"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="../media/images/Constant.png" />
+		<span class="const-title">
+			<span class="const-name">XOAD_EVENTS_LIFETIME</span> = 60*2
+			(line <span class="line-number"><a href="..//__filesource/fsource_XOAD__configxoad.config.php.html#a115">115</a></span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines the default lifetime for an event.</p>
+<p class="description"><p>The default value is 2 minutes. Please note, that  the lifetime should be between 30 seconds and 5 minutes  for performance reasons.</p></p>
+	
+		
+</div>
+<a name="defineXOAD_EVENTS_STORAGE_DSN"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="../media/images/Constant.png" />
+		<span class="const-title">
+			<span class="const-name">XOAD_EVENTS_STORAGE_DSN</span> = 'File'
+			(line <span class="line-number"><a href="..//__filesource/fsource_XOAD__configxoad.config.php.html#a103">103</a></span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines the data source name and parameters to use when event's information is saved.</p>
+<p class="description"><p>DSN Examples:</p><p><pre><ol><code><pre><li> <span class="src-id">File</span>:<span class="src-comm">//c:\events.txt</span></li>
+<li> <span class="src-id">MySQL</span>:</li>
+</pre></code></ol></pre></p></p>
+	
+		
+</div>
+<a name="defineXOAD_SERIALIZER_SKIP_STRING"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="../media/images/Constant.png" />
+		<span class="const-title">
+			<span class="const-name">XOAD_SERIALIZER_SKIP_STRING</span> = '&lt;![xoadSerializer:skipString['
+			(line <span class="line-number"><a href="..//__filesource/fsource_XOAD__configxoad.config.php.html#a43">43</a></span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines the prefix that is used to indicate the Serializer to skip string serialization.</p>
+<p class="description"><p>Example:</p><p><pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'xoad.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-var">$arr </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">, </span><span class="src-id"><a href="../XOAD/_config_xoad_config_php.html#defineXOAD_SERIALIZER_SKIP_STRING">XOAD_SERIALIZER_SKIP_STRING</a> </span>. <span class="src-str">'function skip() { alert(&quot;skip.&quot;); }'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+<li> &lt;script type=&quot;text/javascript&quot;&gt;</li>
+<li>&nbsp;</li>
+<li> var arr = <span class="src-php">&lt;?= </span><span class="src-id"><a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Serializer.html#methodserialize">serialize</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">) </span><span class="src-php">?&gt;</span>;</li>
+<li>&nbsp;</li>
+<li> arr[2]();</li>
+<li>&nbsp;</li>
+<li> &lt;/script&gt;</li>
+</pre></code></ol></pre></p></p>
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:51 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

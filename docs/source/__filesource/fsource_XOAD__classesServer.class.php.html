@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for Server.class.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file Server.class.php</h1>
+<p>Documentation is available at <a href="../XOAD/_classes_Server_class_php.html">Server.class.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a><span class="src-doc">/**</span></li>
+<li><a name="a3"></a><span class="src-doc"> * XOAD Server file.</span></li>
+<li><a name="a4"></a><span class="src-doc"> *</span></li>
+<li><a name="a5"></a><span class="src-doc"> * &lt;p&gt;This file defines the </span><span class="src-doc-inlinetag">{@link XOAD_Server}</span><span class="src-doc"> Class.&lt;/p&gt;</span></li>
+<li><a name="a6"></a><span class="src-doc"> * &lt;p&gt;Example:&lt;/p&gt;</span></li>
+<li><a name="a7"></a><span class="src-doc"> * &lt;code&gt;</span></li>
+<li><a name="a8"></a><span class="src-doc"> * &lt;?php</span></li>
+<li><a name="a9"></a><span class="src-doc"> *</span></li>
+<li><a name="a10"></a><span class="src-doc"> * require_once('xoad.php');</span></li>
+<li><a name="a11"></a><span class="src-doc"> *</span></li>
+<li><a name="a12"></a><span class="src-doc"> * class Calculator</span></li>
+<li><a name="a13"></a><span class="src-doc"> * {</span></li>
+<li><a name="a14"></a><span class="src-doc"> *     var $result;</span></li>
+<li><a name="a15"></a><span class="src-doc"> *</span></li>
+<li><a name="a16"></a><span class="src-doc"> *     function Calculator()</span></li>
+<li><a name="a17"></a><span class="src-doc"> *     {</span></li>
+<li><a name="a18"></a><span class="src-doc"> *         $this-&gt;result = 0;</span></li>
+<li><a name="a19"></a><span class="src-doc"> *     }</span></li>
+<li><a name="a20"></a><span class="src-doc"> *</span></li>
+<li><a name="a21"></a><span class="src-doc"> *     function Add($arg)</span></li>
+<li><a name="a22"></a><span class="src-doc"> *     {</span></li>
+<li><a name="a23"></a><span class="src-doc"> *         $this-&gt;result += $arg;</span></li>
+<li><a name="a24"></a><span class="src-doc"> *     }</span></li>
+<li><a name="a25"></a><span class="src-doc"> * }</span></li>
+<li><a name="a26"></a><span class="src-doc"> *</span></li>
+<li><a name="a27"></a><span class="src-doc"> * XOAD_Server::runServer();</span></li>
+<li><a name="a28"></a><span class="src-doc"> *</span></li>
+<li><a name="a29"></a><span class="src-doc"> * ?&gt;</span></li>
+<li><a name="a30"></a><span class="src-doc"> * &lt;/code&gt;</span></li>
+<li><a name="a31"></a><span class="src-doc"> *</span></li>
+<li><a name="a32"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc">    Stanimir Angeloff</span></li>
+<li><a name="a33"></a><span class="src-doc"> *</span></li>
+<li><a name="a34"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc">    XOAD</span></li>
+<li><a name="a35"></a><span class="src-doc"> *</span></li>
+<li><a name="a36"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@version</span><span class="src-doc">    0.6.0.0</span></li>
+<li><a name="a37"></a><span class="src-doc"> *</span></li>
+<li><a name="a38"></a><span class="src-doc"> */</span></li>
+<li><a name="a39"></a>&nbsp;</li>
+<li><a name="a40"></a><span class="src-doc">/**</span></li>
+<li><a name="a41"></a><span class="src-doc"> * XOAD Server Class.</span></li>
+<li><a name="a42"></a><span class="src-doc"> *</span></li>
+<li><a name="a43"></a><span class="src-doc"> * &lt;p&gt;This class is used to handle client callbacks.&lt;/p&gt;</span></li>
+<li><a name="a44"></a><span class="src-doc"> * &lt;p&gt;Example:&lt;/p&gt;</span></li>
+<li><a name="a45"></a><span class="src-doc"> * &lt;code&gt;</span></li>
+<li><a name="a46"></a><span class="src-doc"> * &lt;?php</span></li>
+<li><a name="a47"></a><span class="src-doc"> *</span></li>
+<li><a name="a48"></a><span class="src-doc"> * require_once('xoad.php');</span></li>
+<li><a name="a49"></a><span class="src-doc"> *</span></li>
+<li><a name="a50"></a><span class="src-doc"> * class Calculator</span></li>
+<li><a name="a51"></a><span class="src-doc"> * {</span></li>
+<li><a name="a52"></a><span class="src-doc"> *     var $result;</span></li>
+<li><a name="a53"></a><span class="src-doc"> *</span></li>
+<li><a name="a54"></a><span class="src-doc"> *     function Calculator()</span></li>
+<li><a name="a55"></a><span class="src-doc"> *     {</span></li>
+<li><a name="a56"></a><span class="src-doc"> *         $this-&gt;result = 0;</span></li>
+<li><a name="a57"></a><span class="src-doc"> *     }</span></li>
+<li><a name="a58"></a><span class="src-doc"> *</span></li>
+<li><a name="a59"></a><span class="src-doc"> *     function Add($arg)</span></li>
+<li><a name="a60"></a><span class="src-doc"> *     {</span></li>
+<li><a name="a61"></a><span class="src-doc"> *         $this-&gt;result += $arg;</span></li>
+<li><a name="a62"></a><span class="src-doc"> *     }</span></li>
+<li><a name="a63"></a><span class="src-doc"> * }</span></li>
+<li><a name="a64"></a><span class="src-doc"> *</span></li>
+<li><a name="a65"></a><span class="src-doc"> * XOAD_Server::runServer();</span></li>
+<li><a name="a66"></a><span class="src-doc"> *</span></li>
+<li><a name="a67"></a><span class="src-doc"> * ?&gt;</span></li>
+<li><a name="a68"></a><span class="src-doc"> * &lt;/code&gt;</span></li>
+<li><a name="a69"></a><span class="src-doc"> *</span></li>
+<li><a name="a70"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc">        Stanimir Angeloff</span></li>
+<li><a name="a71"></a><span class="src-doc"> *</span></li>
+<li><a name="a72"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc">        XOAD</span></li>
+<li><a name="a73"></a><span class="src-doc"> *</span></li>
+<li><a name="a74"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@version</span><span class="src-doc">        0.6.0.0</span></li>
+<li><a name="a75"></a><span class="src-doc"> *</span></li>
+<li><a name="a76"></a><span class="src-doc"> */</span></li>
+<li><a name="a77"></a><span class="src-key">class </span><a href="../XOAD/XOAD_Server.html">XOAD_Server</a> <span class="src-key">extends </span><a href="../XOAD/XOAD_Observable.html">XOAD_Observable</a></li>
+<li><a name="a78"></a><span class="src-sym">{</span></li>
+<li><a name="a79"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a80"></a><span class="src-doc">     * Checks if the request is a client callback</span></li>
+<li><a name="a81"></a><span class="src-doc">     * to the server and handles it.</span></li>
+<li><a name="a82"></a><span class="src-doc">     *</span></li>
+<li><a name="a83"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a84"></a><span class="src-doc">     *</span></li>
+<li><a name="a85"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span><span class="src-doc">   true if the request is a valid client callback,</span></li>
+<li><a name="a86"></a><span class="src-doc">     *                     false otherwise.</span></li>
+<li><a name="a87"></a><span class="src-doc">     *</span></li>
+<li><a name="a88"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a89"></a><span class="src-doc">     *</span></li>
+<li><a name="a90"></a><span class="src-doc">     */</span></li>
+<li><a name="a91"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodrunServer">runServer</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a92"></a>    <span class="src-sym">{</span></li>
+<li><a name="a93"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'runServerEnter'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a94"></a>&nbsp;</li>
+<li><a name="a95"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a96"></a>        <span class="src-sym">}</span></li>
+<li><a name="a97"></a>&nbsp;</li>
+<li><a name="a98"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodinitializeCallback">initializeCallback</a><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a99"></a>&nbsp;</li>
+<li><a name="a100"></a>            <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methoddispatch">dispatch</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a101"></a>&nbsp;</li>
+<li><a name="a102"></a>            /**</li>
+<li><a name="a103"></a>             * Defines whether the request is a client callback.</li>
+<li><a name="a104"></a>             */</li>
+<li><a name="a105"></a>            <a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'XOAD_CALLBACK'</span><span class="src-sym">, </span><span class="src-id">true</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a106"></a>        <span class="src-sym">}</span></li>
+<li><a name="a107"></a>&nbsp;</li>
+<li><a name="a108"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">'XOAD_CALLBACK'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a109"></a>&nbsp;</li>
+<li><a name="a110"></a>            /**</li>
+<li><a name="a111"></a>             * Defines whether the request is a client callback.</li>
+<li><a name="a112"></a>             */</li>
+<li><a name="a113"></a>            <a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'XOAD_CALLBACK'</span><span class="src-sym">, </span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a114"></a>        <span class="src-sym">}</span></li>
+<li><a name="a115"></a>&nbsp;</li>
+<li><a name="a116"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'runServerLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'isCallback' </span>=&gt; <span class="src-id">XOAD_CALLBACK</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a117"></a>&nbsp;</li>
+<li><a name="a118"></a>            <span class="src-key">return </span><span class="src-id">XOAD_CALLBACK</span><span class="src-sym">;</span></li>
+<li><a name="a119"></a>&nbsp;</li>
+<li><a name="a120"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a121"></a>&nbsp;</li>
+<li><a name="a122"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a123"></a>        <span class="src-sym">}</span></li>
+<li><a name="a124"></a>    <span class="src-sym">}</span></li>
+<li><a name="a125"></a>&nbsp;</li>
+<li><a name="a126"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a127"></a><span class="src-doc">     * Checks if the request is a client callback to the</span></li>
+<li><a name="a128"></a><span class="src-doc">     * server and initializes callback parameters.</span></li>
+<li><a name="a129"></a><span class="src-doc">     *</span></li>
+<li><a name="a130"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a131"></a><span class="src-doc">     *</span></li>
+<li><a name="a132"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span><span class="src-doc">   true if the request is a valid client callback,</span></li>
+<li><a name="a133"></a><span class="src-doc">     *                     false otherwise.</span></li>
+<li><a name="a134"></a><span class="src-doc">     *</span></li>
+<li><a name="a135"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a136"></a><span class="src-doc">     *</span></li>
+<li><a name="a137"></a><span class="src-doc">     */</span></li>
+<li><a name="a138"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodinitializeCallback">initializeCallback</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a139"></a>    <span class="src-sym">{</span></li>
+<li><a name="a140"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackEnter'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a141"></a>&nbsp;</li>
+<li><a name="a142"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a143"></a>        <span class="src-sym">}</span></li>
+<li><a name="a144"></a>&nbsp;</li>
+<li><a name="a145"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$_GET</span><span class="src-sym">[</span><span class="src-str">'xoadCall'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a146"></a>&nbsp;</li>
+<li><a name="a147"></a>            <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strcasecmp">strcasecmp</a><span class="src-sym">(</span><span class="src-var">$_GET</span><span class="src-sym">[</span><span class="src-str">'xoadCall'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-str">'true'</span><span class="src-sym">) </span>== <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a148"></a>&nbsp;</li>
+<li><a name="a149"></a>                <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'HTTP_RAW_POST_DATA'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a150"></a>&nbsp;</li>
+<li><a name="a151"></a>                    <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a152"></a>                <span class="src-sym">}</span></li>
+<li><a name="a153"></a>&nbsp;</li>
+<li><a name="a154"></a>                <span class="src-var">$requestBody </span>= <span class="src-sym">@</span><a href="http://www.php.net/unserialize">unserialize</a><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'HTTP_RAW_POST_DATA'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a155"></a>&nbsp;</li>
+<li><a name="a156"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$requestBody </span>== <span class="src-id">null</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a157"></a>&nbsp;</li>
+<li><a name="a158"></a>                    <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a159"></a>                <span class="src-sym">}</span></li>
+<li><a name="a160"></a>&nbsp;</li>
+<li><a name="a161"></a>                <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a162"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventPost'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a163"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a164"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a165"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'event'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a166"></a>                <a href="http://www.php.net/array_key_exists">array_key_exists</a><span class="src-sym">(</span><span class="src-str">'data'</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a167"></a>                <a href="http://www.php.net/array_key_exists">array_key_exists</a><span class="src-sym">(</span><span class="src-str">'filter'</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a168"></a>&nbsp;</li>
+<li><a name="a169"></a>                    <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a170"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventPost'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'bool'</span><span class="src-sym">) </span>||</li>
+<li><a name="a171"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'string'</span><span class="src-sym">) </span>||</li>
+<li><a name="a172"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'string'</span><span class="src-sym">) </span>||</li>
+<li><a name="a173"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'event'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'string'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a174"></a>&nbsp;</li>
+<li><a name="a175"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a176"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a177"></a>&nbsp;</li>
+<li><a name="a178"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a179"></a>&nbsp;</li>
+<li><a name="a180"></a>                        <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodloadClass">loadClass</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a181"></a>&nbsp;</li>
+<li><a name="a182"></a>                    <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a183"></a>&nbsp;</li>
+<li><a name="a184"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a185"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a186"></a>&nbsp;</li>
+<li><a name="a187"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodisClassAllowed">isClassAllowed</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a188"></a>&nbsp;</li>
+<li><a name="a189"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a190"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a191"></a>&nbsp;</li>
+<li><a name="a192"></a>                    <span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">] </span>= <span class="src-sym">@</span><a href="http://www.php.net/unserialize">unserialize</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a193"></a>&nbsp;</li>
+<li><a name="a194"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">] </span>=== <span class="src-id">null</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a195"></a>&nbsp;</li>
+<li><a name="a196"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a197"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a198"></a>&nbsp;</li>
+<li><a name="a199"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strcasecmp">strcasecmp</a><span class="src-sym">(</span><a href="http://www.php.net/get_class">get_class</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a200"></a>&nbsp;</li>
+<li><a name="a201"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a202"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a203"></a>&nbsp;</li>
+<li><a name="a204"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackSuccess'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a205"></a>&nbsp;</li>
+<li><a name="a206"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a207"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a208"></a>&nbsp;</li>
+<li><a name="a209"></a>                    <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_REQUEST_BODY'</span><span class="src-sym">] </span>=<span class="src-sym">&amp; </span><span class="src-var">$requestBody</span><span class="src-sym">;</span></li>
+<li><a name="a210"></a>&nbsp;</li>
+<li><a name="a211"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a212"></a>&nbsp;</li>
+<li><a name="a213"></a>                        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a214"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a215"></a>&nbsp;</li>
+<li><a name="a216"></a>                <span class="src-sym">} </span><span class="src-key">else </span><span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a217"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventsCallback'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a218"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'time'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a219"></a>                isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a220"></a>&nbsp;</li>
+<li><a name="a221"></a>                    <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a222"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventsCallback'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'bool'</span><span class="src-sym">) </span>||</li>
+<li><a name="a223"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'time'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'float'</span><span class="src-sym">) </span>||</li>
+<li><a name="a224"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'s_array'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a225"></a>&nbsp;</li>
+<li><a name="a226"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a227"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a228"></a>&nbsp;</li>
+<li><a name="a229"></a>                    <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">] </span><span class="src-key">as </span><span class="src-var">$eventData</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a230"></a>&nbsp;</li>
+<li><a name="a231"></a>                        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$eventData</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a232"></a>&nbsp;</li>
+<li><a name="a233"></a>                            <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodloadClass">loadClass</a><span class="src-sym">(</span><span class="src-var">$eventData</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a234"></a>&nbsp;</li>
+<li><a name="a235"></a>                        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a236"></a>&nbsp;</li>
+<li><a name="a237"></a>                            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a238"></a>                        <span class="src-sym">}</span></li>
+<li><a name="a239"></a>&nbsp;</li>
+<li><a name="a240"></a>                        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodisClassAllowed">isClassAllowed</a><span class="src-sym">(</span><span class="src-var">$eventData</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a241"></a>&nbsp;</li>
+<li><a name="a242"></a>                            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a243"></a>                        <span class="src-sym">}</span></li>
+<li><a name="a244"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a245"></a>&nbsp;</li>
+<li><a name="a246"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackSuccess'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a247"></a>&nbsp;</li>
+<li><a name="a248"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a249"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a250"></a>&nbsp;</li>
+<li><a name="a251"></a>                    <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_REQUEST_BODY'</span><span class="src-sym">] </span>=<span class="src-sym">&amp; </span><span class="src-var">$requestBody</span><span class="src-sym">;</span></li>
+<li><a name="a252"></a>&nbsp;</li>
+<li><a name="a253"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a254"></a>&nbsp;</li>
+<li><a name="a255"></a>                        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a256"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a257"></a>&nbsp;</li>
+<li><a name="a258"></a>                <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a259"></a>&nbsp;</li>
+<li><a name="a260"></a>                    <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a261"></a>                    <span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">)) </span>||</li>
+<li><a name="a262"></a>                    <span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span>||</li>
+<li><a name="a263"></a>                    <span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'method'</span><span class="src-sym">]</span><span class="src-sym">)) </span>||</li>
+<li><a name="a264"></a>                    <span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">]</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a265"></a>&nbsp;</li>
+<li><a name="a266"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a267"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a268"></a>&nbsp;</li>
+<li><a name="a269"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a270"></a>&nbsp;</li>
+<li><a name="a271"></a>                        <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodloadClass">loadClass</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a272"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a273"></a>&nbsp;</li>
+<li><a name="a274"></a>                    <span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">] </span>= <span class="src-sym">@</span><a href="http://www.php.net/unserialize">unserialize</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a275"></a>&nbsp;</li>
+<li><a name="a276"></a>                    <span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">] </span>= <span class="src-sym">@</span><a href="http://www.php.net/unserialize">unserialize</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a277"></a>&nbsp;</li>
+<li><a name="a278"></a>                    <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a279"></a>                    <span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">] </span>=== <span class="src-id">null</span><span class="src-sym">) </span>||</li>
+<li><a name="a280"></a>                    <span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">] </span>=== <span class="src-id">null</span><span class="src-sym">) </span>||</li>
+<li><a name="a281"></a>                    <span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">] </span>=== <span class="src-id">null</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a282"></a>&nbsp;</li>
+<li><a name="a283"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a284"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a285"></a>&nbsp;</li>
+<li><a name="a286"></a>                    <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a287"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'object'</span><span class="src-sym">) </span>||</li>
+<li><a name="a288"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'string'</span><span class="src-sym">) </span>||</li>
+<li><a name="a289"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'method'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'string'</span><span class="src-sym">) </span>||</li>
+<li><a name="a290"></a>                    <span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">]</span><span class="src-sym">) </span>!= <span class="src-str">'s_array'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a291"></a>&nbsp;</li>
+<li><a name="a292"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a293"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a294"></a>&nbsp;</li>
+<li><a name="a295"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strcasecmp">strcasecmp</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">, </span><a href="http://www.php.net/get_class">get_class</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">)) </span>!= <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a296"></a>&nbsp;</li>
+<li><a name="a297"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a298"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a299"></a>&nbsp;</li>
+<li><a name="a300"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodisClassAllowed">isClassAllowed</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a301"></a>&nbsp;</li>
+<li><a name="a302"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a303"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a304"></a>&nbsp;</li>
+<li><a name="a305"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/method_exists">method_exists</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-id"><a href="../XOAD/_config_xoad_config_php.html#defineXOAD_CLIENT_METADATA_METHOD_NAME">XOAD_CLIENT_METADATA_METHOD_NAME</a></span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a306"></a>&nbsp;</li>
+<li><a name="a307"></a>                        <a href="http://www.php.net/call_user_func_array">call_user_func_array</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-id"><a href="../XOAD/_config_xoad_config_php.html#defineXOAD_CLIENT_METADATA_METHOD_NAME">XOAD_CLIENT_METADATA_METHOD_NAME</a></span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-id">null</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a308"></a>&nbsp;</li>
+<li><a name="a309"></a>                        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">xoadMeta</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a310"></a>&nbsp;</li>
+<li><a name="a311"></a>                            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">xoadMeta</span><span class="src-sym">) </span>== <span class="src-str">'object'</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a312"></a>&nbsp;</li>
+<li><a name="a313"></a>                                <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strcasecmp">strcasecmp</a><span class="src-sym">(</span><a href="http://www.php.net/get_class">get_class</a><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">xoadMeta</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-str">'XOAD_Meta'</span><span class="src-sym">) </span>== <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a314"></a>&nbsp;</li>
+<li><a name="a315"></a>                                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">xoadMeta</span><span class="src-sym">-&gt;</span><span class="src-id">isPublicMethod</span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'method'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a316"></a>&nbsp;</li>
+<li><a name="a317"></a>                                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a318"></a>                                    <span class="src-sym">}</span></li>
+<li><a name="a319"></a>                                <span class="src-sym">}</span></li>
+<li><a name="a320"></a>                            <span class="src-sym">}</span></li>
+<li><a name="a321"></a>                        <span class="src-sym">}</span></li>
+<li><a name="a322"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a323"></a>&nbsp;</li>
+<li><a name="a324"></a>                    <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackSuccess'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a325"></a>&nbsp;</li>
+<li><a name="a326"></a>                        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a327"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a328"></a>&nbsp;</li>
+<li><a name="a329"></a>                    <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_REQUEST_BODY'</span><span class="src-sym">] </span>=<span class="src-sym">&amp; </span><span class="src-var">$requestBody</span><span class="src-sym">;</span></li>
+<li><a name="a330"></a>&nbsp;</li>
+<li><a name="a331"></a>                    <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a332"></a>&nbsp;</li>
+<li><a name="a333"></a>                        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a334"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a335"></a>                <span class="src-sym">}</span></li>
+<li><a name="a336"></a>            <span class="src-sym">}</span></li>
+<li><a name="a337"></a>        <span class="src-sym">}</span></li>
+<li><a name="a338"></a>&nbsp;</li>
+<li><a name="a339"></a>        <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'initializeCallbackLeave'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a340"></a>&nbsp;</li>
+<li><a name="a341"></a>        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a342"></a>    <span class="src-sym">}</span></li>
+<li><a name="a343"></a>&nbsp;</li>
+<li><a name="a344"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a345"></a><span class="src-doc">     * Dispatches a client callback to the server.</span></li>
+<li><a name="a346"></a><span class="src-doc">     *</span></li>
+<li><a name="a347"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a348"></a><span class="src-doc">     *</span></li>
+<li><a name="a349"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   Outputs JavaString code that contains the result</span></li>
+<li><a name="a350"></a><span class="src-doc">     *                     and the output of the callback.</span></li>
+<li><a name="a351"></a><span class="src-doc">     *</span></li>
+<li><a name="a352"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a353"></a><span class="src-doc">     *</span></li>
+<li><a name="a354"></a><span class="src-doc">     */</span></li>
+<li><a name="a355"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methoddispatch">dispatch</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a356"></a>    <span class="src-sym">{</span></li>
+<li><a name="a357"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_REQUEST_BODY'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a358"></a>&nbsp;</li>
+<li><a name="a359"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a360"></a>        <span class="src-sym">}</span></li>
+<li><a name="a361"></a>&nbsp;</li>
+<li><a name="a362"></a>        <span class="src-var">$requestBody </span>=<span class="src-sym">&amp; </span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_REQUEST_BODY'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a363"></a>&nbsp;</li>
+<li><a name="a364"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'dispatchEnter'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a365"></a>&nbsp;</li>
+<li><a name="a366"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a367"></a>        <span class="src-sym">}</span></li>
+<li><a name="a368"></a>&nbsp;</li>
+<li><a name="a369"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventPost'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a370"></a>&nbsp;</li>
+<li><a name="a371"></a>            <span class="src-var">$callbackResponse </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a372"></a>&nbsp;</li>
+<li><a name="a373"></a>            <span class="src-var">$storage </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../XOAD/XOAD_Events/XOAD_Events_Storage.html">XOAD_Events_Storage</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Events/XOAD_Events_Storage.html#methodgetStorage">getStorage</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a374"></a>&nbsp;</li>
+<li><a name="a375"></a>            <span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'status'</span><span class="src-sym">] </span>= <span class="src-var">$storage</span><span class="src-sym">-&gt;</span><span class="src-id">postEvent</span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'event'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'sender'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'filter'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a376"></a>&nbsp;</li>
+<li><a name="a377"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'dispatchLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">, </span><span class="src-str">'response' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$callbackResponse</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a378"></a>&nbsp;</li>
+<li><a name="a379"></a>                <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'status'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a380"></a>&nbsp;</li>
+<li><a name="a381"></a>                    print <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-var">$callbackResponse</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a382"></a>                <span class="src-sym">}</span></li>
+<li><a name="a383"></a>            <span class="src-sym">}</span></li>
+<li><a name="a384"></a>&nbsp;</li>
+<li><a name="a385"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'eventsCallback'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a386"></a>&nbsp;</li>
+<li><a name="a387"></a>            <span class="src-var">$eventsQuery </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a388"></a>&nbsp;</li>
+<li><a name="a389"></a>            <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">] </span><span class="src-key">as </span><span class="src-var">$event</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a390"></a>&nbsp;</li>
+<li><a name="a391"></a>                <span class="src-var">$eventsQuery</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span></li>
+<li><a name="a392"></a>                <span class="src-str">'event'        </span>=&gt;    <span class="src-var">$event</span><span class="src-sym">[</span><span class="src-str">'event'</span><span class="src-sym">]</span><span class="src-sym">,</span></li>
+<li><a name="a393"></a>                <span class="src-str">'className'    </span>=&gt;    <span class="src-var">$event</span><span class="src-sym">[</span><span class="src-str">'className'</span><span class="src-sym">]</span><span class="src-sym">,</span></li>
+<li><a name="a394"></a>                <span class="src-str">'filter'    </span>=&gt;    <span class="src-var">$event</span><span class="src-sym">[</span><span class="src-str">'filter'</span><span class="src-sym">]</span><span class="src-sym">,</span></li>
+<li><a name="a395"></a>                <span class="src-str">'time'        </span>=&gt;    <span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'time'</span><span class="src-sym">]</span></li>
+<li><a name="a396"></a>                <span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a397"></a>            <span class="src-sym">}</span></li>
+<li><a name="a398"></a>&nbsp;</li>
+<li><a name="a399"></a>            <span class="src-var">$callbackResponse </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a400"></a>&nbsp;</li>
+<li><a name="a401"></a>            <span class="src-var">$storage </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../XOAD/XOAD_Events/XOAD_Events_Storage.html">XOAD_Events_Storage</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Events/XOAD_Events_Storage.html#methodgetStorage">getStorage</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a402"></a>&nbsp;</li>
+<li><a name="a403"></a>            <span class="src-var">$storage</span><span class="src-sym">-&gt;</span><span class="src-id">cleanEvents</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a404"></a>&nbsp;</li>
+<li><a name="a405"></a>            <span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'result'</span><span class="src-sym">] </span>= <span class="src-var">$storage</span><span class="src-sym">-&gt;</span><span class="src-id">filterMultipleEvents</span><span class="src-sym">(</span><span class="src-var">$eventsQuery</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a406"></a>&nbsp;</li>
+<li><a name="a407"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'dispatchLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">, </span><span class="src-str">'response' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$callbackResponse</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a408"></a>&nbsp;</li>
+<li><a name="a409"></a>                <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'result'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a410"></a>&nbsp;</li>
+<li><a name="a411"></a>                    print <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-var">$callbackResponse</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a412"></a>                <span class="src-sym">}</span></li>
+<li><a name="a413"></a>            <span class="src-sym">}</span></li>
+<li><a name="a414"></a>&nbsp;</li>
+<li><a name="a415"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a416"></a>&nbsp;</li>
+<li><a name="a417"></a>            <span class="src-var">$callbackResponse </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a418"></a>&nbsp;</li>
+<li><a name="a419"></a>            <span class="src-var">$outputBuffering </span>= <span class="src-sym">@</span><a href="http://www.php.net/ob_start">ob_start</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a420"></a>&nbsp;</li>
+<li><a name="a421"></a>            <a href="http://www.php.net/set_error_handler">set_error_handler</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'XOAD_Server'</span><span class="src-sym">, </span><span class="src-str">'handleError'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li><a name="a422"></a>&nbsp;</li>
+<li><a name="a423"></a>            <span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'returnValue'</span><span class="src-sym">] </span>= <a href="http://www.php.net/call_user_func_array">call_user_func_array</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'method'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'arguments'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a424"></a>&nbsp;</li>
+<li><a name="a425"></a>            <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">'XOAD_SERVER_EXCEPTION'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a426"></a>&nbsp;</li>
+<li><a name="a427"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'dispatchFailed'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">, </span><span class="src-str">'message' </span>=&gt; <span class="src-id">XOAD_SERVER_EXCEPTION</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a428"></a>&nbsp;</li>
+<li><a name="a429"></a>                    <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodthrowException">throwException</a><span class="src-sym">(</span><span class="src-id">XOAD_SERVER_EXCEPTION</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a430"></a>&nbsp;</li>
+<li><a name="a431"></a>                    <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a432"></a>                <span class="src-sym">}</span></li>
+<li><a name="a433"></a>            <span class="src-sym">}</span></li>
+<li><a name="a434"></a>&nbsp;</li>
+<li><a name="a435"></a>            <span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'returnObject'</span><span class="src-sym">] </span>=<span class="src-sym">&amp; </span><span class="src-var">$requestBody</span><span class="src-sym">[</span><span class="src-str">'source'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a436"></a>&nbsp;</li>
+<li><a name="a437"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$outputBuffering</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a438"></a>&nbsp;</li>
+<li><a name="a439"></a>                <span class="src-var">$output </span>= <span class="src-sym">@</span><a href="http://www.php.net/ob_get_contents">ob_get_contents</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a440"></a>&nbsp;</li>
+<li><a name="a441"></a>                <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$output</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a442"></a>&nbsp;</li>
+<li><a name="a443"></a>                    <span class="src-var">$callbackResponse</span><span class="src-sym">[</span><span class="src-str">'output'</span><span class="src-sym">] </span>= <span class="src-var">$output</span><span class="src-sym">;</span></li>
+<li><a name="a444"></a>                <span class="src-sym">}</span></li>
+<li><a name="a445"></a>&nbsp;</li>
+<li><a name="a446"></a>                <span class="src-sym">@</span><a href="http://www.php.net/ob_end_clean">ob_end_clean</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a447"></a>            <span class="src-sym">}</span></li>
+<li><a name="a448"></a>&nbsp;</li>
+<li><a name="a449"></a>            <a href="http://www.php.net/restore_error_handler">restore_error_handler</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a450"></a>&nbsp;</li>
+<li><a name="a451"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'dispatchLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'request' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$requestBody</span><span class="src-sym">, </span><span class="src-str">'response' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$callbackResponse</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a452"></a>&nbsp;</li>
+<li><a name="a453"></a>                print <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-var">$callbackResponse</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a454"></a>            <span class="src-sym">}</span></li>
+<li><a name="a455"></a>        <span class="src-sym">}</span></li>
+<li><a name="a456"></a>    <span class="src-sym">}</span></li>
+<li><a name="a457"></a>&nbsp;</li>
+<li><a name="a458"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a459"></a><span class="src-doc">     * Handles all errors that occur during the callback.</span></li>
+<li><a name="a460"></a><span class="src-doc">     *</span></li>
+<li><a name="a461"></a><span class="src-doc">     * &lt;p&gt;Only E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR and E_USER_ERROR</span></li>
+<li><a name="a462"></a><span class="src-doc">     * will halt the callback and throw an exception.&lt;/p&gt;</span></li>
+<li><a name="a463"></a><span class="src-doc">     *</span></li>
+<li><a name="a464"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    protected</span></li>
+<li><a name="a465"></a><span class="src-doc">     *</span></li>
+<li><a name="a466"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">int </span><span class="src-doc">       </span><span class="src-doc-var">$type </span><span class="src-doc">       Error type (compile, core, user...).</span></li>
+<li><a name="a467"></a><span class="src-doc">     *</span></li>
+<li><a name="a468"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$message </span><span class="src-doc">   Error message.</span></li>
+<li><a name="a469"></a><span class="src-doc">     *</span></li>
+<li><a name="a470"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">void </span></li>
+<li><a name="a471"></a><span class="src-doc">     *</span></li>
+<li><a name="a472"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a473"></a><span class="src-doc">     *</span></li>
+<li><a name="a474"></a><span class="src-doc">     */</span></li>
+<li><a name="a475"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodhandleError">handleError</a><span class="src-sym">(</span><span class="src-var">$type</span><span class="src-sym">, </span><span class="src-var">$message</span><span class="src-sym">)</span></li>
+<li><a name="a476"></a>    <span class="src-sym">{</span></li>
+<li><a name="a477"></a>        <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/error_reporting">error_reporting</a><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a478"></a>&nbsp;</li>
+<li><a name="a479"></a>            <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'handleErrorEnter'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'type' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$type</span><span class="src-sym">, </span><span class="src-str">'message' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$message</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a480"></a>&nbsp;</li>
+<li><a name="a481"></a>                <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a482"></a>            <span class="src-sym">}</span></li>
+<li><a name="a483"></a>&nbsp;</li>
+<li><a name="a484"></a>            <span class="src-var">$breakLevel </span>= <span class="src-id">E_ERROR </span>| <span class="src-id">E_PARSE </span>| <span class="src-id">E_CORE_ERROR </span>| <span class="src-id">E_COMPILE_ERROR </span>| <span class="src-id">E_USER_ERROR</span><span class="src-sym">;</span></li>
+<li><a name="a485"></a>&nbsp;</li>
+<li><a name="a486"></a>            <span class="src-key">if </span><span class="src-sym">((</span><span class="src-var">$type </span><span class="src-sym">&amp; </span><span class="src-var">$breakLevel</span><span class="src-sym">) </span>&gt; <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a487"></a>&nbsp;</li>
+<li><a name="a488"></a>                <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">'XOAD_SERVER_EXCEPTION'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a489"></a>&nbsp;</li>
+<li><a name="a490"></a>                    /**</li>
+<li><a name="a491"></a>                     * Defines the error message that caused the callback to halt.</li>
+<li><a name="a492"></a>                     */</li>
+<li><a name="a493"></a>                    <a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'XOAD_SERVER_EXCEPTION'</span><span class="src-sym">, </span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a494"></a>                <span class="src-sym">}</span></li>
+<li><a name="a495"></a>            <span class="src-sym">}</span></li>
+<li><a name="a496"></a>        <span class="src-sym">}</span></li>
+<li><a name="a497"></a>&nbsp;</li>
+<li><a name="a498"></a>        <span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'handleErrorLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'type' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$type</span><span class="src-sym">, </span><span class="src-str">'message' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$message</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li><a name="a499"></a>    <span class="src-sym">}</span></li>
+<li><a name="a500"></a>&nbsp;</li>
+<li><a name="a501"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a502"></a><span class="src-doc">     * Throws a XOAD callback exception.</span></li>
+<li><a name="a503"></a><span class="src-doc">     *</span></li>
+<li><a name="a504"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    protected</span></li>
+<li><a name="a505"></a><span class="src-doc">     *</span></li>
+<li><a name="a506"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$message </span><span class="src-doc">   Exception message.</span></li>
+<li><a name="a507"></a><span class="src-doc">     *</span></li>
+<li><a name="a508"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   Outputs JavaString code that contains the</span></li>
+<li><a name="a509"></a><span class="src-doc">     *                     exception message.</span></li>
+<li><a name="a510"></a><span class="src-doc">     *</span></li>
+<li><a name="a511"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a512"></a><span class="src-doc">     *</span></li>
+<li><a name="a513"></a><span class="src-doc">     */</span></li>
+<li><a name="a514"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodthrowException">throwException</a><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)</span></li>
+<li><a name="a515"></a>    <span class="src-sym">{</span></li>
+<li><a name="a516"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'throwExceptionEnter'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'message' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$message</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a517"></a>&nbsp;</li>
+<li><a name="a518"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a519"></a>        <span class="src-sym">}</span></li>
+<li><a name="a520"></a>&nbsp;</li>
+<li><a name="a521"></a>        <a href="http://www.php.net/restore_error_handler">restore_error_handler</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a522"></a>&nbsp;</li>
+<li><a name="a523"></a>        <span class="src-var">$callbackException </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a524"></a>&nbsp;</li>
+<li><a name="a525"></a>        <span class="src-var">$callbackException</span><span class="src-sym">[</span><span class="src-str">'exception'</span><span class="src-sym">] </span>= <span class="src-var">$message</span><span class="src-sym">;</span></li>
+<li><a name="a526"></a>&nbsp;</li>
+<li><a name="a527"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id"><a href="../XOAD/XOAD_Server.html">XOAD_Server</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-str">'throwExceptionLeave'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'message' </span>=&gt; <span class="src-sym">&amp;</span><span class="src-var">$message</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a528"></a>&nbsp;</li>
+<li><a name="a529"></a>            print <span class="src-id"><a href="../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-var">$callbackException</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a530"></a>        <span class="src-sym">}</span></li>
+<li><a name="a531"></a>    <span class="src-sym">}</span></li>
+<li><a name="a532"></a>&nbsp;</li>
+<li><a name="a533"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a534"></a><span class="src-doc">     * Adds a specified class to the classes map.</span></li>
+<li><a name="a535"></a><span class="src-doc">     *</span></li>
+<li><a name="a536"></a><span class="src-doc">     * &lt;p&gt;Example:&lt;/p&gt;</span></li>
+<li><a name="a537"></a><span class="src-doc">     * &lt;code&gt;</span></li>
+<li><a name="a538"></a><span class="src-doc">     * &lt;?php</span></li>
+<li><a name="a539"></a><span class="src-doc">     *</span></li>
+<li><a name="a540"></a><span class="src-doc">     * require_once('xoad.php');</span></li>
+<li><a name="a541"></a><span class="src-doc">     *</span></li>
+<li><a name="a542"></a><span class="src-doc">     * XOAD_Server::mapClass('Calculator', 'Calculator.class.php');</span></li>
+<li><a name="a543"></a><span class="src-doc">     *</span></li>
+<li><a name="a544"></a><span class="src-doc">     * XOAD_Server::mapClass('EnglishDictionary', array('BaseDictionary.class.php', 'EnglishDictionary.class.php'));</span></li>
+<li><a name="a545"></a><span class="src-doc">     *</span></li>
+<li><a name="a546"></a><span class="src-doc">     * XOAD_Server::runServer();</span></li>
+<li><a name="a547"></a><span class="src-doc">     *</span></li>
+<li><a name="a548"></a><span class="src-doc">     * ?&gt;</span></li>
+<li><a name="a549"></a><span class="src-doc">     * &lt;/code&gt;</span></li>
+<li><a name="a550"></a><span class="src-doc">     *</span></li>
+<li><a name="a551"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a552"></a><span class="src-doc">     *</span></li>
+<li><a name="a553"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$className </span><span class="src-doc">   The class name to add.</span></li>
+<li><a name="a554"></a><span class="src-doc">     *</span></li>
+<li><a name="a555"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$files </span><span class="src-doc">       The files that are required</span></li>
+<li><a name="a556"></a><span class="src-doc">     *                                 to load the class.</span></li>
+<li><a name="a557"></a><span class="src-doc">     *</span></li>
+<li><a name="a558"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">void </span></li>
+<li><a name="a559"></a><span class="src-doc">     *</span></li>
+<li><a name="a560"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a561"></a><span class="src-doc">     *</span></li>
+<li><a name="a562"></a><span class="src-doc">     */</span></li>
+<li><a name="a563"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodmapClass">mapClass</a><span class="src-sym">(</span><span class="src-var">$className</span><span class="src-sym">, </span><span class="src-var">$files</span><span class="src-sym">)</span></li>
+<li><a name="a564"></a>    <span class="src-sym">{</span></li>
+<li><a name="a565"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a566"></a>&nbsp;</li>
+<li><a name="a567"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a568"></a>        <span class="src-sym">}</span></li>
+<li><a name="a569"></a>&nbsp;</li>
+<li><a name="a570"></a>        <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">]</span><span class="src-sym">[</span><a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$className</span><span class="src-sym">)</span><span class="src-sym">] </span>= <span class="src-var">$files</span><span class="src-sym">;</span></li>
+<li><a name="a571"></a>    <span class="src-sym">}</span></li>
+<li><a name="a572"></a>&nbsp;</li>
+<li><a name="a573"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a574"></a><span class="src-doc">     * Loads a specified class from the classes map.</span></li>
+<li><a name="a575"></a><span class="src-doc">     *</span></li>
+<li><a name="a576"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a577"></a><span class="src-doc">     *</span></li>
+<li><a name="a578"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$className </span><span class="src-doc">   The class name to load. Note that all files</span></li>
+<li><a name="a579"></a><span class="src-doc">     *                                 that are included in the class map will be</span></li>
+<li><a name="a580"></a><span class="src-doc">     *                                 loaded.</span></li>
+<li><a name="a581"></a><span class="src-doc">     *</span></li>
+<li><a name="a582"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">void </span></li>
+<li><a name="a583"></a><span class="src-doc">     *</span></li>
+<li><a name="a584"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a585"></a><span class="src-doc">     *</span></li>
+<li><a name="a586"></a><span class="src-doc">     */</span></li>
+<li><a name="a587"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodloadClass">loadClass</a><span class="src-sym">(</span><span class="src-var">$className</span><span class="src-sym">)</span></li>
+<li><a name="a588"></a>    <span class="src-sym">{</span></li>
+<li><a name="a589"></a>        <span class="src-var">$className </span>= <a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$className</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a590"></a>&nbsp;</li>
+<li><a name="a591"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a592"></a>&nbsp;</li>
+<li><a name="a593"></a>            <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$className</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a594"></a>&nbsp;</li>
+<li><a name="a595"></a>                <span class="src-var">$files </span>= <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_CLASSES_MAP'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$className</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a596"></a>&nbsp;</li>
+<li><a name="a597"></a>                <span class="src-var">$filesType </span>= <span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$files</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a598"></a>&nbsp;</li>
+<li><a name="a599"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$filesType </span>== <span class="src-str">'string'</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a600"></a>&nbsp;</li>
+<li><a name="a601"></a>                    <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-var">$files</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a602"></a>&nbsp;</li>
+<li><a name="a603"></a>                <span class="src-sym">} </span><span class="src-key">else </span><span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a604"></a>                <span class="src-sym">(</span><span class="src-var">$filesType </span>== <span class="src-str">'s_array'</span><span class="src-sym">) </span>||</li>
+<li><a name="a605"></a>                <span class="src-sym">(</span><span class="src-var">$filesType </span>== <span class="src-str">'a_array'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a606"></a>&nbsp;</li>
+<li><a name="a607"></a>                    <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$files </span><span class="src-key">as </span><span class="src-var">$fileName</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a608"></a>&nbsp;</li>
+<li><a name="a609"></a>                        <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a610"></a>                    <span class="src-sym">}</span></li>
+<li><a name="a611"></a>                <span class="src-sym">}</span></li>
+<li><a name="a612"></a>            <span class="src-sym">}</span></li>
+<li><a name="a613"></a>        <span class="src-sym">}</span></li>
+<li><a name="a614"></a>    <span class="src-sym">}</span></li>
+<li><a name="a615"></a>&nbsp;</li>
+<li><a name="a616"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a617"></a><span class="src-doc">     * Adds specified classes to the allowed classes map.</span></li>
+<li><a name="a618"></a><span class="src-doc">     *</span></li>
+<li><a name="a619"></a><span class="src-doc">     * &lt;p&gt;Example:&lt;/p&gt;</span></li>
+<li><a name="a620"></a><span class="src-doc">     * &lt;code&gt;</span></li>
+<li><a name="a621"></a><span class="src-doc">     * &lt;?php</span></li>
+<li><a name="a622"></a><span class="src-doc">     *</span></li>
+<li><a name="a623"></a><span class="src-doc">     * class AllowedClass</span></li>
+<li><a name="a624"></a><span class="src-doc">     * {</span></li>
+<li><a name="a625"></a><span class="src-doc">     *     function call() { return 'AllowedClass-&gt;call()'; }</span></li>
+<li><a name="a626"></a><span class="src-doc">     * }</span></li>
+<li><a name="a627"></a><span class="src-doc">     *</span></li>
+<li><a name="a628"></a><span class="src-doc">     * class DeniedClass</span></li>
+<li><a name="a629"></a><span class="src-doc">     * {</span></li>
+<li><a name="a630"></a><span class="src-doc">     *     function call() { return 'DeniedClass-&gt;call()'; }</span></li>
+<li><a name="a631"></a><span class="src-doc">     * }</span></li>
+<li><a name="a632"></a><span class="src-doc">     *</span></li>
+<li><a name="a633"></a><span class="src-doc">     * require_once('xoad.php');</span></li>
+<li><a name="a634"></a><span class="src-doc">     *</span></li>
+<li><a name="a635"></a><span class="src-doc">     * XOAD_Server::allowClasses('AllowedClass');</span></li>
+<li><a name="a636"></a><span class="src-doc">     *</span></li>
+<li><a name="a637"></a><span class="src-doc">     * if (XOAD_Server::runServer()) {</span></li>
+<li><a name="a638"></a><span class="src-doc">     *</span></li>
+<li><a name="a639"></a><span class="src-doc">     *     exit;</span></li>
+<li><a name="a640"></a><span class="src-doc">     * }</span></li>
+<li><a name="a641"></a><span class="src-doc">     *</span></li>
+<li><a name="a642"></a><span class="src-doc">     * ?&gt;</span></li>
+<li><a name="a643"></a><span class="src-doc">     * &lt;?= XOAD_Utilities::header() ?&gt;</span></li>
+<li><a name="a644"></a><span class="src-doc">     *</span></li>
+<li><a name="a645"></a><span class="src-doc">     * &lt;script type=&quot;text/javascript&quot;&gt;</span></li>
+<li><a name="a646"></a><span class="src-doc">     *</span></li>
+<li><a name="a647"></a><span class="src-doc">     * var allowedClass = &lt;?= XOAD_Client::register(new AllowedClass()) ?&gt;;</span></li>
+<li><a name="a648"></a><span class="src-doc">     *</span></li>
+<li><a name="a649"></a><span class="src-doc">     * var deniedClass = &lt;?= XOAD_Client::register(new DeniedClass()) ?&gt;;</span></li>
+<li><a name="a650"></a><span class="src-doc">     *</span></li>
+<li><a name="a651"></a><span class="src-doc">     * alert(allowedClass.call());</span></li>
+<li><a name="a652"></a><span class="src-doc">     *</span></li>
+<li><a name="a653"></a><span class="src-doc">     * // This line will throw an exception.</span></li>
+<li><a name="a654"></a><span class="src-doc">     * // DeniedClass is not in the allowed classes list.</span></li>
+<li><a name="a655"></a><span class="src-doc">     * alert(deniedClass.call());</span></li>
+<li><a name="a656"></a><span class="src-doc">     *</span></li>
+<li><a name="a657"></a><span class="src-doc">     * &lt;/script&gt;</span></li>
+<li><a name="a658"></a><span class="src-doc">     * &lt;/code&gt;</span></li>
+<li><a name="a659"></a><span class="src-doc">     *</span></li>
+<li><a name="a660"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a661"></a><span class="src-doc">     *</span></li>
+<li><a name="a662"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$classes </span><span class="src-doc">   The classes that can be accessed within</span></li>
+<li><a name="a663"></a><span class="src-doc">     *                                 a callback request.</span></li>
+<li><a name="a664"></a><span class="src-doc">     *</span></li>
+<li><a name="a665"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">void </span></li>
+<li><a name="a666"></a><span class="src-doc">     *</span></li>
+<li><a name="a667"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a668"></a><span class="src-doc">     *</span></li>
+<li><a name="a669"></a><span class="src-doc">     */</span></li>
+<li><a name="a670"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodallowClasses">allowClasses</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span></li>
+<li><a name="a671"></a>    <span class="src-sym">{</span></li>
+<li><a name="a672"></a>        <span class="src-var">$classesType </span>= <span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a673"></a>&nbsp;</li>
+<li><a name="a674"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_ALLOWED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a675"></a>&nbsp;</li>
+<li><a name="a676"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_ALLOWED_CLASSES'</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a677"></a>        <span class="src-sym">}</span></li>
+<li><a name="a678"></a>&nbsp;</li>
+<li><a name="a679"></a>        <span class="src-var">$allowedClasses </span>=<span class="src-sym">&amp; </span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_ALLOWED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a680"></a>&nbsp;</li>
+<li><a name="a681"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$classesType </span>== <span class="src-str">'string'</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a682"></a>&nbsp;</li>
+<li><a name="a683"></a>            <span class="src-var">$allowedClasses</span><span class="src-sym">[</span><span class="src-sym">] </span>= <a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a684"></a>&nbsp;</li>
+<li><a name="a685"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-key">if </span><span class="src-sym">((</span><span class="src-var">$classesType </span>== <span class="src-str">'s_array'</span><span class="src-sym">) </span>|| <span class="src-sym">(</span><span class="src-var">$classesType </span>== <span class="src-str">'a_array'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a686"></a>&nbsp;</li>
+<li><a name="a687"></a>            <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$classes </span><span class="src-key">as </span><span class="src-var">$class</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a688"></a>&nbsp;</li>
+<li><a name="a689"></a>                <span class="src-var">$allowedClasses</span><span class="src-sym">[</span><span class="src-sym">] </span>= <a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$class</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a690"></a>            <span class="src-sym">}</span></li>
+<li><a name="a691"></a>        <span class="src-sym">}</span></li>
+<li><a name="a692"></a>    <span class="src-sym">}</span></li>
+<li><a name="a693"></a>&nbsp;</li>
+<li><a name="a694"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a695"></a><span class="src-doc">     * Adds specified classes to the denied classes map.</span></li>
+<li><a name="a696"></a><span class="src-doc">     *</span></li>
+<li><a name="a697"></a><span class="src-doc">     * &lt;p&gt;Example:&lt;/p&gt;</span></li>
+<li><a name="a698"></a><span class="src-doc">     * &lt;code&gt;</span></li>
+<li><a name="a699"></a><span class="src-doc">     * &lt;?php</span></li>
+<li><a name="a700"></a><span class="src-doc">     *</span></li>
+<li><a name="a701"></a><span class="src-doc">     * class AllowedClass</span></li>
+<li><a name="a702"></a><span class="src-doc">     * {</span></li>
+<li><a name="a703"></a><span class="src-doc">     *     function call() { return 'AllowedClass-&gt;call()'; }</span></li>
+<li><a name="a704"></a><span class="src-doc">     * }</span></li>
+<li><a name="a705"></a><span class="src-doc">     *</span></li>
+<li><a name="a706"></a><span class="src-doc">     * class DeniedClass</span></li>
+<li><a name="a707"></a><span class="src-doc">     * {</span></li>
+<li><a name="a708"></a><span class="src-doc">     *     function call() { return 'DeniedClass-&gt;call()'; }</span></li>
+<li><a name="a709"></a><span class="src-doc">     * }</span></li>
+<li><a name="a710"></a><span class="src-doc">     *</span></li>
+<li><a name="a711"></a><span class="src-doc">     * require_once('xoad.php');</span></li>
+<li><a name="a712"></a><span class="src-doc">     *</span></li>
+<li><a name="a713"></a><span class="src-doc">     * XOAD_Server::denyClasses('DeniedClass');</span></li>
+<li><a name="a714"></a><span class="src-doc">     *</span></li>
+<li><a name="a715"></a><span class="src-doc">     * if (XOAD_Server::runServer()) {</span></li>
+<li><a name="a716"></a><span class="src-doc">     *</span></li>
+<li><a name="a717"></a><span class="src-doc">     *     exit;</span></li>
+<li><a name="a718"></a><span class="src-doc">     * }</span></li>
+<li><a name="a719"></a><span class="src-doc">     *</span></li>
+<li><a name="a720"></a><span class="src-doc">     * ?&gt;</span></li>
+<li><a name="a721"></a><span class="src-doc">     * &lt;?= XOAD_Utilities::header() ?&gt;</span></li>
+<li><a name="a722"></a><span class="src-doc">     *</span></li>
+<li><a name="a723"></a><span class="src-doc">     * &lt;script type=&quot;text/javascript&quot;&gt;</span></li>
+<li><a name="a724"></a><span class="src-doc">     *</span></li>
+<li><a name="a725"></a><span class="src-doc">     * var allowedClass = &lt;?= XOAD_Client::register(new AllowedClass()) ?&gt;;</span></li>
+<li><a name="a726"></a><span class="src-doc">     *</span></li>
+<li><a name="a727"></a><span class="src-doc">     * var deniedClass = &lt;?= XOAD_Client::register(new DeniedClass()) ?&gt;;</span></li>
+<li><a name="a728"></a><span class="src-doc">     *</span></li>
+<li><a name="a729"></a><span class="src-doc">     * alert(allowedClass.call());</span></li>
+<li><a name="a730"></a><span class="src-doc">     *</span></li>
+<li><a name="a731"></a><span class="src-doc">     * // This line will throw an exception.</span></li>
+<li><a name="a732"></a><span class="src-doc">     * // DeniedClass is in the denied classes list.</span></li>
+<li><a name="a733"></a><span class="src-doc">     * alert(deniedClass.call());</span></li>
+<li><a name="a734"></a><span class="src-doc">     *</span></li>
+<li><a name="a735"></a><span class="src-doc">     * &lt;/script&gt;</span></li>
+<li><a name="a736"></a><span class="src-doc">     * &lt;/code&gt;</span></li>
+<li><a name="a737"></a><span class="src-doc">     *</span></li>
+<li><a name="a738"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a739"></a><span class="src-doc">     *</span></li>
+<li><a name="a740"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$classes </span><span class="src-doc">   The classes that can NOT be accessed</span></li>
+<li><a name="a741"></a><span class="src-doc">     *                                 within a callback request.</span></li>
+<li><a name="a742"></a><span class="src-doc">     *</span></li>
+<li><a name="a743"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">void </span></li>
+<li><a name="a744"></a><span class="src-doc">     *</span></li>
+<li><a name="a745"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a746"></a><span class="src-doc">     *</span></li>
+<li><a name="a747"></a><span class="src-doc">     */</span></li>
+<li><a name="a748"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methoddenyClasses">denyClasses</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span></li>
+<li><a name="a749"></a>    <span class="src-sym">{</span></li>
+<li><a name="a750"></a>        <span class="src-var">$classesType </span>= <span class="src-id"><a href="../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Utilities.html#methodgetType">getType</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a751"></a>&nbsp;</li>
+<li><a name="a752"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_DENIED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a753"></a>&nbsp;</li>
+<li><a name="a754"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_DENIED_CLASSES'</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a755"></a>        <span class="src-sym">}</span></li>
+<li><a name="a756"></a>&nbsp;</li>
+<li><a name="a757"></a>        <span class="src-var">$deniedClasses </span>=<span class="src-sym">&amp; </span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_DENIED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a758"></a>&nbsp;</li>
+<li><a name="a759"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$classesType </span>== <span class="src-str">'string'</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a760"></a>&nbsp;</li>
+<li><a name="a761"></a>            <span class="src-var">$deniedClasses</span><span class="src-sym">[</span><span class="src-sym">] </span>= <a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$classes</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a762"></a>&nbsp;</li>
+<li><a name="a763"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-key">if </span><span class="src-sym">((</span><span class="src-var">$classesType </span>== <span class="src-str">'s_array'</span><span class="src-sym">) </span>|| <span class="src-sym">(</span><span class="src-var">$classesType </span>== <span class="src-str">'a_array'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a764"></a>&nbsp;</li>
+<li><a name="a765"></a>            <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$classes </span><span class="src-key">as </span><span class="src-var">$class</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a766"></a>&nbsp;</li>
+<li><a name="a767"></a>                <span class="src-var">$deniedClasses</span><span class="src-sym">[</span><span class="src-sym">] </span>= <a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$class</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a768"></a>            <span class="src-sym">}</span></li>
+<li><a name="a769"></a>        <span class="src-sym">}</span></li>
+<li><a name="a770"></a>    <span class="src-sym">}</span></li>
+<li><a name="a771"></a>&nbsp;</li>
+<li><a name="a772"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a773"></a><span class="src-doc">     * Checks if a class can be accessed within a callback request.</span></li>
+<li><a name="a774"></a><span class="src-doc">     *</span></li>
+<li><a name="a775"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a776"></a><span class="src-doc">     *</span></li>
+<li><a name="a777"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$class </span><span class="src-doc">   The class name to check.</span></li>
+<li><a name="a778"></a><span class="src-doc">     *</span></li>
+<li><a name="a779"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span><span class="src-doc">   true if the class can be accessed, false if</span></li>
+<li><a name="a780"></a><span class="src-doc">     *                     the class is denied and can NOT be accessed.</span></li>
+<li><a name="a781"></a><span class="src-doc">     *</span></li>
+<li><a name="a782"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a783"></a><span class="src-doc">     *</span></li>
+<li><a name="a784"></a><span class="src-doc">     */</span></li>
+<li><a name="a785"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodisClassAllowed">isClassAllowed</a><span class="src-sym">(</span><span class="src-var">$class</span><span class="src-sym">)</span></li>
+<li><a name="a786"></a>    <span class="src-sym">{</span></li>
+<li><a name="a787"></a>        <span class="src-var">$allowedClasses </span>= <span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a788"></a>&nbsp;</li>
+<li><a name="a789"></a>        <span class="src-var">$deniedClasses </span>= <span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a790"></a>&nbsp;</li>
+<li><a name="a791"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_ALLOWED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a792"></a>&nbsp;</li>
+<li><a name="a793"></a>            <span class="src-var">$allowedClasses </span>=<span class="src-sym">&amp; </span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_ALLOWED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a794"></a>        <span class="src-sym">}</span></li>
+<li><a name="a795"></a>&nbsp;</li>
+<li><a name="a796"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_DENIED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a797"></a>&nbsp;</li>
+<li><a name="a798"></a>            <span class="src-var">$deniedClasses </span>=<span class="src-sym">&amp; </span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_XOAD_SERVER_DENIED_CLASSES'</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a799"></a>        <span class="src-sym">}</span></li>
+<li><a name="a800"></a>&nbsp;</li>
+<li><a name="a801"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$deniedClasses</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a802"></a>&nbsp;</li>
+<li><a name="a803"></a>            <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/in_array">in_array</a><span class="src-sym">(</span><a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$class</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-var">$deniedClasses</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a804"></a>&nbsp;</li>
+<li><a name="a805"></a>                <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a806"></a>            <span class="src-sym">}</span></li>
+<li><a name="a807"></a>        <span class="src-sym">}</span></li>
+<li><a name="a808"></a>&nbsp;</li>
+<li><a name="a809"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$allowedClasses</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a810"></a>&nbsp;</li>
+<li><a name="a811"></a>            <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><a href="http://www.php.net/in_array">in_array</a><span class="src-sym">(</span><a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><span class="src-var">$class</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-var">$allowedClasses</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a812"></a>&nbsp;</li>
+<li><a name="a813"></a>                <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a814"></a>            <span class="src-sym">}</span></li>
+<li><a name="a815"></a>        <span class="src-sym">}</span></li>
+<li><a name="a816"></a>&nbsp;</li>
+<li><a name="a817"></a>        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a818"></a>    <span class="src-sym">}</span></li>
+<li><a name="a819"></a>&nbsp;</li>
+<li><a name="a820"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a821"></a><span class="src-doc">     * Adds a </span><span class="src-doc-inlinetag">{@link XOAD_Server}</span><span class="src-doc"> events observer.</span></li>
+<li><a name="a822"></a><span class="src-doc">     *</span></li>
+<li><a name="a823"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a824"></a><span class="src-doc">     *</span></li>
+<li><a name="a825"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$observer </span><span class="src-doc">   The observer object to add (must extend </span><span class="src-doc-inlinetag">{@link XOAD_Observer}</span><span class="src-doc">).</span></li>
+<li><a name="a826"></a><span class="src-doc">     *</span></li>
+<li><a name="a827"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   true on success, false otherwise.</span></li>
+<li><a name="a828"></a><span class="src-doc">     *</span></li>
+<li><a name="a829"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@static</span></li>
+<li><a name="a830"></a><span class="src-doc">     *</span></li>
+<li><a name="a831"></a><span class="src-doc">     */</span></li>
+<li><a name="a832"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodaddObserver">addObserver</a><span class="src-sym">(</span><span class="src-sym">&amp;</span><span class="src-var">$observer</span><span class="src-sym">)</span></li>
+<li><a name="a833"></a>    <span class="src-sym">{</span></li>
+<li><a name="a834"></a>        <span class="src-key">return </span><span class="src-id">parent</span><span class="src-sym">::</span><a href="../XOAD/XOAD_Observable.html#methodaddObserver">addObserver</a><span class="src-sym">(</span><span class="src-var">$observer</span><span class="src-sym">, </span><span class="src-str">'XOAD_Server'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a835"></a>    <span class="src-sym">}</span></li>
+<li><a name="a836"></a>&nbsp;</li>
+<li><a name="a837"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a838"></a><span class="src-doc">     *</span></li>
+<li><a name="a839"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a840"></a><span class="src-doc">     *</span></li>
+<li><a name="a841"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span></li>
+<li><a name="a842"></a><span class="src-doc">     *</span></li>
+<li><a name="a843"></a><span class="src-doc">     */</span></li>
+<li><a name="a844"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Server.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-var">$event </span>= <span class="src-str">'default'</span><span class="src-sym">, </span><span class="src-var">$arg </span>= <span class="src-id">null</span><span class="src-sym">)</span></li>
+<li><a name="a845"></a>    <span class="src-sym">{</span></li>
+<li><a name="a846"></a>        <span class="src-key">return </span><span class="src-id">parent</span><span class="src-sym">::</span><a href="../XOAD/XOAD_Observable.html#methodnotifyObservers">notifyObservers</a><span class="src-sym">(</span><span class="src-var">$event</span><span class="src-sym">, </span><span class="src-var">$arg</span><span class="src-sym">, </span><span class="src-str">'XOAD_Server'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a847"></a>    <span class="src-sym">}</span></li>
+<li><a name="a848"></a><span class="src-sym">}</span></li>
+<li><a name="a849"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:42 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</body>
+</html>

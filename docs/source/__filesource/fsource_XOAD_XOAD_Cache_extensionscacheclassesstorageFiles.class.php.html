@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for Files.class.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file Files.class.php</h1>
+<p>Documentation is available at <a href="../XOAD/XOAD_Cache/_extensions_cache_classes_storage_Files_class_php.html">Files.class.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a><span class="src-doc">/**</span></li>
+<li><a name="a3"></a><span class="src-doc"> * XOAD_Cache Storage Files Provider File.</span></li>
+<li><a name="a4"></a><span class="src-doc"> *</span></li>
+<li><a name="a5"></a><span class="src-doc"> * &lt;p&gt;This file defines the </span><span class="src-doc-inlinetag">{@link XOAD_Cache_Storage_Files}</span><span class="src-doc"> Class.&lt;/p&gt;</span></li>
+<li><a name="a6"></a><span class="src-doc"> * &lt;p&gt;You should not include this file directly. It is used</span></li>
+<li><a name="a7"></a><span class="src-doc"> * by </span><span class="src-doc-inlinetag">{@link XOAD_Cache}</span><span class="src-doc"> extension.&lt;/p&gt;</span></li>
+<li><a name="a8"></a><span class="src-doc"> *</span></li>
+<li><a name="a9"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc">        Stanimir Angeloff</span></li>
+<li><a name="a10"></a><span class="src-doc"> *</span></li>
+<li><a name="a11"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc">        XOAD</span></li>
+<li><a name="a12"></a><span class="src-doc"> *</span></li>
+<li><a name="a13"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">    XOAD_Cache</span></li>
+<li><a name="a14"></a><span class="src-doc"> *</span></li>
+<li><a name="a15"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@version</span><span class="src-doc">        0.6.0.0</span></li>
+<li><a name="a16"></a><span class="src-doc"> *</span></li>
+<li><a name="a17"></a><span class="src-doc"> */</span></li>
+<li><a name="a18"></a>&nbsp;</li>
+<li><a name="a19"></a><span class="src-doc">/**</span></li>
+<li><a name="a20"></a><span class="src-doc"> * XOAD_Cache Storage Files Class.</span></li>
+<li><a name="a21"></a><span class="src-doc"> *</span></li>
+<li><a name="a22"></a><span class="src-doc"> * &lt;p&gt;This class is a </span><span class="src-doc-inlinetag">{@link XOAD_Cache_Storage}</span><span class="src-doc"> successor.&lt;/p&gt;</span></li>
+<li><a name="a23"></a><span class="src-doc"> *</span></li>
+<li><a name="a24"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc">        Stanimir Angeloff</span></li>
+<li><a name="a25"></a><span class="src-doc"> *</span></li>
+<li><a name="a26"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc">        XOAD</span></li>
+<li><a name="a27"></a><span class="src-doc"> *</span></li>
+<li><a name="a28"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">    XOAD_Cache</span></li>
+<li><a name="a29"></a><span class="src-doc"> *</span></li>
+<li><a name="a30"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@version</span><span class="src-doc">        0.6.0.0</span></li>
+<li><a name="a31"></a><span class="src-doc"> *</span></li>
+<li><a name="a32"></a><span class="src-doc"> */</span></li>
+<li><a name="a33"></a><span class="src-key">class </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html">XOAD_Cache_Storage_Files</a> <span class="src-key">extends </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage.html#methodXOAD_Cache_Storage">XOAD_Cache_Storage</a></li>
+<li><a name="a34"></a><span class="src-sym">{</span></li>
+<li><a name="a35"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a36"></a><span class="src-doc">     * Holds the directory where the cached data is saved.</span></li>
+<li><a name="a37"></a><span class="src-doc">     *</span></li>
+<li><a name="a38"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    protected</span></li>
+<li><a name="a39"></a><span class="src-doc">     *</span></li>
+<li><a name="a40"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@var </span><span class="src-doc">       </span><span class="src-doc-type">string </span></li>
+<li><a name="a41"></a><span class="src-doc">     *</span></li>
+<li><a name="a42"></a><span class="src-doc">     */</span></li>
+<li><a name="a43"></a>    <span class="src-key">var </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">$container</a> = <span class="src-str">'cache'</span><span class="src-sym">;</span></li>
+<li><a name="a44"></a>&nbsp;</li>
+<li><a name="a45"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a46"></a><span class="src-doc">     * Creates a new instance of the </span><span class="src-doc-inlinetag">{@link XOAD_Cache_Storage_Files}</span><span class="src-doc"> class.</span></li>
+<li><a name="a47"></a><span class="src-doc">     *</span></li>
+<li><a name="a48"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a49"></a><span class="src-doc">     *</span></li>
+<li><a name="a50"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$dsn </span><span class="src-doc">   The data source name and parameters to use</span></li>
+<li><a name="a51"></a><span class="src-doc">     *                             when creating the instance.</span></li>
+<li><a name="a52"></a><span class="src-doc">     *</span></li>
+<li><a name="a53"></a><span class="src-doc">      */</span></li>
+<li><a name="a54"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodXOAD_Cache_Storage_Files">XOAD_Cache_Storage_Files</a><span class="src-sym">(</span><span class="src-var">$dsn</span><span class="src-sym">)</span></li>
+<li><a name="a55"></a>    <span class="src-sym">{</span></li>
+<li><a name="a56"></a>        <span class="src-id">parent</span><span class="src-sym">::</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage.html#methodXOAD_Cache_Storage">XOAD_Cache_Storage</a><span class="src-sym">(</span><span class="src-var">$dsn</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a57"></a>    <span class="src-sym">}</span></li>
+<li><a name="a58"></a>&nbsp;</li>
+<li><a name="a59"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a60"></a><span class="src-doc">     * Gets the absolute path to the cache file.</span></li>
+<li><a name="a61"></a><span class="src-doc">     *</span></li>
+<li><a name="a62"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    private</span></li>
+<li><a name="a63"></a><span class="src-doc">     *</span></li>
+<li><a name="a64"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$id </span><span class="src-doc">   The ID of the cached data.</span></li>
+<li><a name="a65"></a><span class="src-doc">     *</span></li>
+<li><a name="a66"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">string </span></li>
+<li><a name="a67"></a><span class="src-doc">     *</span></li>
+<li><a name="a68"></a><span class="src-doc">     */</span></li>
+<li><a name="a69"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodgetFileName">getFileName</a><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">)</span></li>
+<li><a name="a70"></a>    <span class="src-sym">{</span></li>
+<li><a name="a71"></a>        <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strpos">strpos</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a><span class="src-sym">, </span><span class="src-id">DIRECTORY_SEPARATOR</span><span class="src-sym">) </span>=== <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a72"></a>&nbsp;</li>
+<li><a name="a73"></a>            <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a> . <span class="src-id">DIRECTORY_SEPARATOR </span>. <span class="src-var">$id</span><span class="src-sym">;</span></li>
+<li><a name="a74"></a>        <span class="src-sym">}</span></li>
+<li><a name="a75"></a>&nbsp;</li>
+<li><a name="a76"></a>        <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strlen">strlen</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a><span class="src-sym">) </span>&gt;= <span class="src-num">3</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a77"></a>&nbsp;</li>
+<li><a name="a78"></a>            <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a79"></a>            <span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a><span class="src-sym">{</span><span class="src-num">1</span><span class="src-sym">} </span>== <span class="src-str">':'</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a80"></a>            <span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a><span class="src-sym">{</span><span class="src-num">2</span><span class="src-sym">} </span>== <span class="src-id">DIRECTORY_SEPARATOR</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a81"></a>&nbsp;</li>
+<li><a name="a82"></a>                <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a> . <span class="src-id">DIRECTORY_SEPARATOR </span>. <span class="src-var">$id</span><span class="src-sym">;</span></li>
+<li><a name="a83"></a>            <span class="src-sym">}</span></li>
+<li><a name="a84"></a>        <span class="src-sym">}</span></li>
+<li><a name="a85"></a>&nbsp;</li>
+<li><a name="a86"></a>        <span class="src-key">return </span><span class="src-id"><a href="../XOAD/_xoad_php.html#defineXOAD_BASE">XOAD_BASE</a> </span>. <span class="src-str">'/var/' </span>. <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id"><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#var$container">container</a> </span>. <span class="src-str">'/' </span>. <span class="src-var">$id</span><span class="src-sym">;</span></li>
+<li><a name="a87"></a>    <span class="src-sym">}</span></li>
+<li><a name="a88"></a>&nbsp;</li>
+<li><a name="a89"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a90"></a><span class="src-doc">      * Deletes old data from the cache.</span></li>
+<li><a name="a91"></a><span class="src-doc">     *</span></li>
+<li><a name="a92"></a><span class="src-doc">     * &lt;p&gt;This method is called before calling </span><span class="src-doc-inlinetag">{@link load}</span><span class="src-doc"> to</span></li>
+<li><a name="a93"></a><span class="src-doc">     * delete all expired data from the cache.&lt;/p&gt;</span></li>
+<li><a name="a94"></a><span class="src-doc">     *</span></li>
+<li><a name="a95"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a96"></a><span class="src-doc">     *</span></li>
+<li><a name="a97"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span><span class="src-doc">   true on success, false otherwise.</span></li>
+<li><a name="a98"></a><span class="src-doc">     *</span></li>
+<li><a name="a99"></a><span class="src-doc">     */</span></li>
+<li><a name="a100"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodcollectGarbage">collectGarbage</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a101"></a>    <span class="src-sym">{</span></li>
+<li><a name="a102"></a>        <span class="src-var">$directory </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodgetFileName">getFileName</a><span class="src-sym">(</span><span class="src-str">''</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a103"></a>&nbsp;</li>
+<li><a name="a104"></a>        <a href="http://www.php.net/clearstatcache">clearstatcache</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a105"></a>&nbsp;</li>
+<li><a name="a106"></a>        <span class="src-var">$handle </span>= <span class="src-sym">@</span><a href="http://www.php.net/dir">dir</a><span class="src-sym">(</span><span class="src-var">$directory</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a107"></a>&nbsp;</li>
+<li><a name="a108"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-var">$handle</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a109"></a>&nbsp;</li>
+<li><a name="a110"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a111"></a>        <span class="src-sym">}</span></li>
+<li><a name="a112"></a>&nbsp;</li>
+<li><a name="a113"></a>        <span class="src-var">$time </span>= <a href="http://www.php.net/time">time</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a114"></a>&nbsp;</li>
+<li><a name="a115"></a>        <span class="src-key">while </span><span class="src-sym">(</span><span class="src-id">false </span>!== <span class="src-sym">(</span><span class="src-var">$fileName </span>= <span class="src-var">$handle</span><span class="src-sym">-&gt;</span><span class="src-id">read</span><span class="src-sym">(</span><span class="src-sym">))) </span><span class="src-sym">{</span></li>
+<li><a name="a116"></a>&nbsp;</li>
+<li><a name="a117"></a>            <span class="src-key">if </span><span class="src-sym">(</span></li>
+<li><a name="a118"></a>            <span class="src-sym">(</span><span class="src-var">$fileName </span>== <span class="src-str">'.'</span><span class="src-sym">) </span>||</li>
+<li><a name="a119"></a>            <span class="src-sym">(</span><span class="src-var">$fileName </span>== <span class="src-str">'..'</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a120"></a>&nbsp;</li>
+<li><a name="a121"></a>                <span class="src-key">continue</span><span class="src-sym">;</span></li>
+<li><a name="a122"></a>            <span class="src-sym">}</span></li>
+<li><a name="a123"></a>&nbsp;</li>
+<li><a name="a124"></a>            <span class="src-var">$realFile </span>= <span class="src-var">$directory </span>. <span class="src-var">$fileName</span><span class="src-sym">;</span></li>
+<li><a name="a125"></a>&nbsp;</li>
+<li><a name="a126"></a>            <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><a href="http://www.php.net/is_file">is_file</a><span class="src-sym">(</span><span class="src-var">$realFile</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a127"></a>&nbsp;</li>
+<li><a name="a128"></a>                <span class="src-key">continue</span><span class="src-sym">;</span></li>
+<li><a name="a129"></a>            <span class="src-sym">}</span></li>
+<li><a name="a130"></a>&nbsp;</li>
+<li><a name="a131"></a>            <span class="src-var">$fileHandle </span>= <span class="src-sym">@</span><a href="http://www.php.net/fopen">fopen</a><span class="src-sym">(</span><span class="src-var">$realFile</span><span class="src-sym">, </span><span class="src-str">'rb'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a132"></a>&nbsp;</li>
+<li><a name="a133"></a>            <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-var">$fileHandle</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a134"></a>&nbsp;</li>
+<li><a name="a135"></a>                <span class="src-key">continue</span><span class="src-sym">;</span></li>
+<li><a name="a136"></a>            <span class="src-sym">}</span></li>
+<li><a name="a137"></a>&nbsp;</li>
+<li><a name="a138"></a>            <span class="src-var">$expire </span>= <a href="http://www.php.net/fread">fread</a><span class="src-sym">(</span><span class="src-var">$fileHandle</span><span class="src-sym">, </span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a139"></a>&nbsp;</li>
+<li><a name="a140"></a>            <a href="http://www.php.net/fclose">fclose</a><span class="src-sym">(</span><span class="src-var">$fileHandle</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a141"></a>&nbsp;</li>
+<li><a name="a142"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$expire </span>&lt; <span class="src-var">$time</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a143"></a>&nbsp;</li>
+<li><a name="a144"></a>                <span class="src-sym">@</span><a href="http://www.php.net/unlink">unlink</a><span class="src-sym">(</span><span class="src-var">$realFile</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a145"></a>            <span class="src-sym">}</span></li>
+<li><a name="a146"></a>        <span class="src-sym">}</span></li>
+<li><a name="a147"></a>&nbsp;</li>
+<li><a name="a148"></a>        <span class="src-var">$handle</span><span class="src-sym">-&gt;</span><span class="src-id">close</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a149"></a>&nbsp;</li>
+<li><a name="a150"></a>        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a151"></a>    <span class="src-sym">}</span></li>
+<li><a name="a152"></a>&nbsp;</li>
+<li><a name="a153"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a154"></a><span class="src-doc">      * Loads data from the cache with a given ID.</span></li>
+<li><a name="a155"></a><span class="src-doc">     *</span></li>
+<li><a name="a156"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a157"></a><span class="src-doc">     *</span></li>
+<li><a name="a158"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">string </span><span class="src-doc">   </span><span class="src-doc-var">$id </span><span class="src-doc">   The ID of the cached data.</span></li>
+<li><a name="a159"></a><span class="src-doc">     *</span></li>
+<li><a name="a160"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   The data in the cache with the given ID or null.</span></li>
+<li><a name="a161"></a><span class="src-doc">     *</span></li>
+<li><a name="a162"></a><span class="src-doc">     */</span></li>
+<li><a name="a163"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodload">load</a><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">)</span></li>
+<li><a name="a164"></a>    <span class="src-sym">{</span></li>
+<li><a name="a165"></a>        <span class="src-var">$fileName </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodgetFileName">getFileName</a><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a166"></a>&nbsp;</li>
+<li><a name="a167"></a>        <a href="http://www.php.net/clearstatcache">clearstatcache</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a168"></a>&nbsp;</li>
+<li><a name="a169"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><a href="http://www.php.net/file_exists">file_exists</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a170"></a>&nbsp;</li>
+<li><a name="a171"></a>            <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a172"></a>        <span class="src-sym">}</span></li>
+<li><a name="a173"></a>&nbsp;</li>
+<li><a name="a174"></a>        <span class="src-var">$length </span>= <a href="http://www.php.net/filesize">filesize</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a175"></a>&nbsp;</li>
+<li><a name="a176"></a>        <span class="src-var">$handle </span>= <a href="http://www.php.net/fopen">fopen</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">, </span><span class="src-str">'rb'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a177"></a>&nbsp;</li>
+<li><a name="a178"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-var">$handle</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a179"></a>&nbsp;</li>
+<li><a name="a180"></a>            <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a181"></a>        <span class="src-sym">}</span></li>
+<li><a name="a182"></a>&nbsp;</li>
+<li><a name="a183"></a>        <a href="http://www.php.net/flock">flock</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-id">LOCK_SH</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a184"></a>&nbsp;</li>
+<li><a name="a185"></a>        <span class="src-var">$contents </span>= <a href="http://www.php.net/fread">fread</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-var">$length</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a186"></a>&nbsp;</li>
+<li><a name="a187"></a>        list<span class="src-sym">(</span><span class="src-var">$expire</span><span class="src-sym">, </span><span class="src-var">$data</span><span class="src-sym">) </span>= <a href="http://www.php.net/explode">explode</a><span class="src-sym">(</span><span class="src-str">&quot;\t&quot;</span><span class="src-sym">, </span><span class="src-var">$contents</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a188"></a>&nbsp;</li>
+<li><a name="a189"></a>        <a href="http://www.php.net/flock">flock</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-id">LOCK_UN</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a190"></a>&nbsp;</li>
+<li><a name="a191"></a>        <a href="http://www.php.net/fclose">fclose</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a192"></a>&nbsp;</li>
+<li><a name="a193"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$expire </span>&gt;= <a href="http://www.php.net/time">time</a><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a194"></a>&nbsp;</li>
+<li><a name="a195"></a>            <span class="src-key">return </span><span class="src-var">$data</span><span class="src-sym">;</span></li>
+<li><a name="a196"></a>        <span class="src-sym">}</span></li>
+<li><a name="a197"></a>&nbsp;</li>
+<li><a name="a198"></a>        <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a199"></a>    <span class="src-sym">}</span></li>
+<li><a name="a200"></a>&nbsp;</li>
+<li><a name="a201"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a202"></a><span class="src-doc">      * Saves data in the cache with a given ID and lifetime.</span></li>
+<li><a name="a203"></a><span class="src-doc">     *</span></li>
+<li><a name="a204"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@access</span><span class="src-doc">    public</span></li>
+<li><a name="a205"></a><span class="src-doc">     *</span></li>
+<li><a name="a206"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$id </span><span class="src-doc">           The ID to use when saving the data.</span></li>
+<li><a name="a207"></a><span class="src-doc">     *</span></li>
+<li><a name="a208"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">int </span><span class="src-doc">       </span><span class="src-doc-var">$expires </span><span class="src-doc">   The lifetime time in seconds for the</span></li>
+<li><a name="a209"></a><span class="src-doc">     *                                 cached data.</span></li>
+<li><a name="a210"></a><span class="src-doc">     *</span></li>
+<li><a name="a211"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">   </span><span class="src-doc-type">mixed </span><span class="src-doc">   </span><span class="src-doc-var">$data </span><span class="src-doc">       The data to cache.</span></li>
+<li><a name="a212"></a><span class="src-doc">     *</span></li>
+<li><a name="a213"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc">   </span><span class="src-doc-type">bool </span><span class="src-doc">   True on success, false otherwise.</span></li>
+<li><a name="a214"></a><span class="src-doc">     *</span></li>
+<li><a name="a215"></a><span class="src-doc">     */</span></li>
+<li><a name="a216"></a>    <span class="src-key">function </span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodsave">save</a><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">, </span><span class="src-var">$expires</span><span class="src-sym">, </span><span class="src-var">$data</span><span class="src-sym">)</span></li>
+<li><a name="a217"></a>    <span class="src-sym">{</span></li>
+<li><a name="a218"></a>        <span class="src-var">$fileName </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../XOAD/XOAD_Cache/XOAD_Cache_Storage_Files.html#methodgetFileName">getFileName</a><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a219"></a>&nbsp;</li>
+<li><a name="a220"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-key">empty</span><span class="src-sym">(</span><span class="src-var">$expires</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a221"></a>&nbsp;</li>
+<li><a name="a222"></a>            <span class="src-var">$expires </span>= <span class="src-id"><a href="../XOAD/_config_extensions_config_php.html#defineXOAD_CACHE_LIFETIME">XOAD_CACHE_LIFETIME</a></span><span class="src-sym">;</span></li>
+<li><a name="a223"></a>        <span class="src-sym">}</span></li>
+<li><a name="a224"></a>&nbsp;</li>
+<li><a name="a225"></a>        <span class="src-var">$handle </span>= <span class="src-sym">@</span><a href="http://www.php.net/fopen">fopen</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">, </span><span class="src-str">'a+b'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a226"></a>&nbsp;</li>
+<li><a name="a227"></a>        <span class="src-key">if </span><span class="src-sym">( </span><span class="src-sym">! </span><span class="src-var">$handle</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a228"></a>&nbsp;</li>
+<li><a name="a229"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a230"></a>        <span class="src-sym">}</span></li>
+<li><a name="a231"></a>&nbsp;</li>
+<li><a name="a232"></a>        <span class="src-sym">@</span><a href="http://www.php.net/ignore_user_abort">ignore_user_abort</a><span class="src-sym">(</span><span class="src-id">true</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a233"></a>&nbsp;</li>
+<li><a name="a234"></a>        <a href="http://www.php.net/flock">flock</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-id">LOCK_EX</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a235"></a>&nbsp;</li>
+<li><a name="a236"></a>        <a href="http://www.php.net/ftruncate">ftruncate</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-num">0</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a237"></a>&nbsp;</li>
+<li><a name="a238"></a>        <a href="http://www.php.net/fwrite">fwrite</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><a href="http://www.php.net/time">time</a><span class="src-sym">(</span><span class="src-sym">) </span>+ <span class="src-var">$expires </span>. <span class="src-str">&quot;\t&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a239"></a>        <a href="http://www.php.net/fwrite">fwrite</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-var">$data</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a240"></a>&nbsp;</li>
+<li><a name="a241"></a>        <a href="http://www.php.net/flock">flock</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">, </span><span class="src-id">LOCK_UN</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a242"></a>&nbsp;</li>
+<li><a name="a243"></a>        <a href="http://www.php.net/fclose">fclose</a><span class="src-sym">(</span><span class="src-var">$handle</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a244"></a>&nbsp;</li>
+<li><a name="a245"></a>        <span class="src-sym">@</span><a href="http://www.php.net/ignore_user_abort">ignore_user_abort</a><span class="src-sym">(</span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a246"></a>&nbsp;</li>
+<li><a name="a247"></a>        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a248"></a>    <span class="src-sym">}</span></li>
+<li><a name="a249"></a><span class="src-sym">}</span></li>
+<li><a name="a250"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:10 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</body>
+</html>

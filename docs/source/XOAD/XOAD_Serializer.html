@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class XOAD_Serializer</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> XOAD_Serializer</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XOAD Serializer Class.</p>
+<p class="description"><p>This class is used to serialize a PHP variable  into a <a href="http://www.json.org">JSON</a> string.</p><p>Example:</p><p><pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'xoad.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-var">$arr </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">, </span><span class="src-str">&quot;String&quot;</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;Nested&quot;</span><span class="src-sym">, </span><span class="src-num">3</span><span class="src-sym">, </span><span class="src-num">4</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">5</span><span class="src-sym">, </span><span class="src-num">6</span><span class="src-sym">)))</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+<li> &lt;script type=&quot;text/javascript&quot;&gt;</li>
+<li>&nbsp;</li>
+<li> var arr = <span class="src-php">&lt;?= </span><span class="src-id"><a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Serializer.html#methodserialize">serialize</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">) </span><span class="src-php">?&gt;</span>;</li>
+<li>&nbsp;</li>
+<li> &lt;/script&gt;</li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> 0.6.0.0</li>
+				<li><span class="field">author:</span> Stanimir Angeloff</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_classes_Serializer_class_php.html">/classes/Serializer.class.php</a> (line <span class="field"><a href="..//__filesource/fsource_XOAD__classesSerializer.class.php.html#a58">58</a></span>)
+		</p>
+		
+				
+		<pre><a href="../XOAD/XOAD_Observable.html">XOAD_Observable</a>
+   |
+   --XOAD_Serializer</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#addObserver" title="details" class="method-name">addObserver</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$observer</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#notifyObservers" title="details" class="method-name">notifyObservers</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$event</span> = <span class="var-default">'default'</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$arg</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#serialize" title="details" class="method-name">serialize</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$var</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodaddObserver" id="addObserver"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">addObserver</span> (line <span class="line-number"><a href="..//__filesource/fsource_XOAD__classesSerializer.class.php.html#a314">314</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a <a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a> events observer.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true on success, false otherwise.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			addObserver
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$observer</span><span class="var-description">: The observer object to add (must extend <a href="../XOAD/XOAD_Observer.html">XOAD_Observer</a>).</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../XOAD/XOAD_Observable.html#methodaddObserver">XOAD_Observable::addObserver()</a></dt>
+					</dl>
+		
+	</div>
+<a name="methodnotifyObservers" id="notifyObservers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">notifyObservers</span> (line <span class="line-number"><a href="..//__filesource/fsource_XOAD__classesSerializer.class.php.html#a326">326</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			notifyObservers
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$event</span> = <span class="var-default">'default'</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$arg</span> = <span class="var-default">null</span>])
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../XOAD/XOAD_Observable.html#methodnotifyObservers">XOAD_Observable::notifyObservers()</a></dt>
+					</dl>
+		
+	</div>
+<a name="methodserialize" id="serialize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">serialize</span> (line <span class="line-number"><a href="..//__filesource/fsource_XOAD__classesSerializer.class.php.html#a85">85</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Serializes a PHP variable into a <a href="http://www.json.org">JSON</a> string.</p>
+<p class="description"><p>Example:</p><p><pre><ol><code><pre><li> &lt;<span class="src-id">script type</span>=<span class="src-str">&quot;text/javascript&quot;</span>&gt;</li>
+<li> &lt;?<span class="src-id">php </span><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'xoad.php'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-php">?&gt;</span></li>
+<li>&nbsp;</li>
+<li> var arr = <span class="src-php">&lt;?= </span><span class="src-id"><a href="../XOAD/XOAD_Serializer.html">XOAD_Serializer</a></span><span class="src-sym">::</span><a href="../XOAD/XOAD_Serializer.html#methodserialize">serialize</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">2</span><span class="src-sym">, </span><span class="src-str">&quot;string&quot;</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;Nested&quot;</span><span class="src-sym">))) </span><span class="src-php">?&gt;</span>;</li>
+<li>&nbsp;</li>
+<li> alert(arr);</li>
+<li>&nbsp;</li>
+<li> &lt;/script&gt;</li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> <a href="http://www.json.org">JSON</a> string that                     represents the variable.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			serialize
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$var</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$var</span><span class="var-description">: Variable to serialize.</span>			</li>
+				</ul>
+		
+		
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../XOAD/XOAD_Observable.html">XOAD_Observable</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../XOAD/XOAD_Observable.html#methodaddObserver">XOAD_Observable::addObserver()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../XOAD/XOAD_Observable.html#methodnotifyObservers">XOAD_Observable::notifyObservers()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:35 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

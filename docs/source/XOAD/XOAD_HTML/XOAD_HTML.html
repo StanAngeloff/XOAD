@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class XOAD_HTML</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> XOAD_HTML</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XOAD HTML Class.</p>
+<p class="description"><p>This class is used to update the content and the  style of a page.</p><p>Example:</p><p><pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-key">class </span><span class="src-id">Update</span></li>
+<li> <span class="src-sym">{</span></li>
+<li>     <span class="src-key">function </span><span class="src-id">ui</span><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li>     <span class="src-sym">{</span></li>
+<li>         <a href="http://www.php.net/sleep">sleep</a><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li>         <span class="src-var">$content </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodgetElementById">getElementById</a><span class="src-sym">(</span><span class="src-str">'content'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li>         <span class="src-var">$content</span><span class="src-sym">-&gt;</span><span class="src-id">innerHTML </span>= <span class="src-str">'Hello World! How are you?'</span><span class="src-sym">;</span></li>
+<li>     <span class="src-sym">}</span></li>
+<li> <span class="src-sym">}</span></li>
+<li>&nbsp;</li>
+<li> <a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'XOAD_AUTOHANDLE'</span><span class="src-sym">, </span><span class="src-id">true</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'xoad.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-php">?&gt;</span></li>
+<li> <span class="src-php">&lt;?= </span><span class="src-id"><a href="../../XOAD/XOAD_Utilities.html">XOAD_Utilities</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Utilities.html#methodheader">header</a><span class="src-sym">(</span><span class="src-str">'.'</span><span class="src-sym">) </span><span class="src-php">?&gt;</span></li>
+<li>&nbsp;</li>
+<li> &lt;div id=&quot;content&quot;&gt;Hello!&lt;/div&gt;</li>
+<li>&nbsp;</li>
+<li> &lt;script type=&quot;text/javascript&quot;&gt;</li>
+<li>&nbsp;</li>
+<li> var obj = <span class="src-php">&lt;?= </span><span class="src-id"><a href="../../XOAD/XOAD_Client.html">XOAD_Client</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_Client.html#methodregister">register</a><span class="src-sym">(</span><span class="src-key">new </span><span class="src-id">Update</span><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-php">?&gt;</span>;</li>
+<li>&nbsp;</li>
+<li> obj.ui(xoad.asyncCall);</li>
+<li>&nbsp;</li>
+<li> &lt;/script&gt;</li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> 0.6.0.0</li>
+				<li><span class="field">author:</span> Stanimir Angeloff</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_extensions_html_classes_HTML_class_php.html">/extensions/html/classes/HTML.class.php</a> (line <span class="field"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a141">141</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object The</span>
+										<a href="#addScriptBlock" title="details" class="method-name">&amp;addScriptBlock</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$script</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object The</span>
+										<a href="#cssQuery" title="details" class="method-name">&amp;cssQuery</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object The</span>
+										<a href="#getElementById" title="details" class="method-name">&amp;getElementById</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object The</span>
+										<a href="#getElementsByName" title="details" class="method-name">&amp;getElementsByName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object The</span>
+										<a href="#getElementsByTagName" title="details" class="method-name">&amp;getElementsByTagName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tagName</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#importForm" title="details" class="method-name">importForm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$formData</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#process" title="details" class="method-name">process</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodaddScriptBlock" id="addScriptBlock"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">addScriptBlock</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a310">310</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a given JavaScript code to the output.</p>
+<p class="description"><p>Note that you must use the '&amp;' operator in order  to get a reference to the script block.</p><p>You should add ';' at the end of the script.</p><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodaddScriptBlock">addScriptBlock</a><span class="src-sym">(</span><span class="src-str">'alert(&quot;Hello World!&quot;);'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DOM element that represents the script block.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object The</span>
+		<span class="method-name">
+			&amp;addScriptBlock
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$script</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$script</span><span class="var-description">: JavaScript source code.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcssQuery" id="cssQuery"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">cssQuery</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a276">276</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an object representing a list of elements that match a given cssQuery in the document.</p>
+<p class="description"><p>Note that you must use the '&amp;' operator in order  to get a reference to the list.</p><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-var">$messages </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodcssQuery">cssQuery</a><span class="src-sym">(</span><span class="src-str">'#message, .message-body'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DOM elements list matching the cssQuery.                     Note that the server has no idea whether                     any elements exists on the client or not.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object The</span>
+		<span class="method-name">
+			&amp;cssQuery
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span><span class="var-description">: String representing the value of                             the cssQuery.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetElementById" id="getElementById"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getElementById</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a165">165</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the element whose ID is specified.</p>
+<p class="description"><p>Note that you must use the '&amp;' operator in order  to get a reference to the element.</p><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-var">$content </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodgetElementById">getElementById</a><span class="src-sym">(</span><span class="src-str">'content'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DOM element with the specified ID.                     Note that the server has no idea whether                     the element exists on the client or not.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object The</span>
+		<span class="method-name">
+			&amp;getElementById
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$id</span><span class="var-description">: String representing the unique id of                         the element being sought.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetElementsByName" id="getElementsByName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getElementsByName</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a202">202</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an object representing a list of elements of a given name in the document.</p>
+<p class="description"><p>Note that you must use the '&amp;' operator in order  to get a reference to the list.</p><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-var">$messages </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodgetElementsByName">getElementsByName</a><span class="src-sym">(</span><span class="src-str">'message'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DOM elements list with the specified name.                     Note that the server has no idea whether                     any elements exists on the client or not.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object The</span>
+		<span class="method-name">
+			&amp;getElementsByName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: String representing the value of                             the name attribute on the element.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetElementsByTagName" id="getElementsByTagName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getElementsByTagName</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a239">239</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an object representing a list of elements of a given tag name in the document.</p>
+<p class="description"><p>Note that you must use the '&amp;' operator in order  to get a reference to the list.</p><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-var">$inputs </span>=<span class="src-sym">&amp; </span><span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodgetElementsByTagName">getElementsByTagName</a><span class="src-sym">(</span><span class="src-str">'input'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DOM elements list with the specified tag name.                     Note that the server has no idea whether                     any elements exists on the client or not.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object The</span>
+		<span class="method-name">
+			&amp;getElementsByTagName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tagName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tagName</span><span class="var-description">: String representing the name of                                 the tag on the element.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodimportForm" id="importForm"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">importForm</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a344">344</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Imports an associative array to the corresponding form elements.</p>
+<p class="description"><p>Example:</p><p><pre><ol><code><pre><li> <span class="src-id"><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html">XOAD_HTML</a></span><span class="src-sym">::</span><a href="../../XOAD/XOAD_HTML/XOAD_HTML.html#methodimportForm">importForm</a><span class="src-sym">(</span><span class="src-str">'mainForm'</span><span class="src-sym">, </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'firstName' </span>=&gt; <span class="src-str">'First'</span><span class="src-sym">, </span><span class="src-str">'lastName' </span>=&gt; <span class="src-str">'Last'</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			importForm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$formData</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$id</span><span class="var-description">: The client ID of the form.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$formData</span><span class="var-description">: Associative array that contains the                                 values to import.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodprocess" id="process"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">process</span> (line <span class="line-number"><a href="../..//__filesource/fsource_XOAD_XOAD_HTML_extensionshtmlclassesHTML.class.php.html#a368">368</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the JavaScript code of all DOM elements.</p>
+<p class="description"><p>You should not call this method directly.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> JavaScript source code for each DOM element                     or null if no DOM elements were created.</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			process
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 12 Nov 2005 20:24:16 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

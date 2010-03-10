@@ -1,0 +1,2 @@
+<div style="background-color: #ffc; border-bottom: 0.1em solid #cca; color: #000; padding: 2px 0 2px 0;">Welcome to <strong>XOAD Simple Chat</strong>.</div>
+<br />

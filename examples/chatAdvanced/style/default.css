@@ -1,0 +1,233 @@
+html
+{
+	overflow: auto;
+}
+
+body
+{
+	background-color: #fff;
+	color: #000;
+	font: normal 0.75em tahoma, verdana, arial, serif;
+	margin: 0;
+	overflow: auto;
+	padding: 0;
+}
+
+table
+{
+	font-size: 1em;
+}
+
+table caption
+{
+	background: #6b5 url(../images/default/caption-background.gif) repeat-x 0 0;
+	border-bottom: 0.1em solid #99c;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0;
+	padding: 0.5em 1em 0.5em 1em;
+	text-align: left;
+}
+
+/**
+ * Content Cell
+ */
+
+table .cell-content
+{
+	width: 85%;
+}
+
+table #box-content
+{
+	border-bottom: 0.1em solid #99c;
+	border-left: 0.1em solid #99c;
+	height: 35em;
+	overflow: auto;
+}
+
+table #box-content .wrapper
+{
+	margin: 0;
+	padding: 0.5em;
+}
+
+table #box-content .message,
+table #box-content .join-message,
+table #box-content .leave-message,
+table #box-content .nick-change-message
+{
+	font-size: 0.9em;
+	line-height: 1.6em;
+	padding: 0.1em 0 0.1em 0;
+}
+
+table #box-content .join-message
+{
+	color: #00f;
+}
+
+table #box-content .leave-message
+{
+	color: #800;
+}
+
+table #box-content .leave-message .nick
+{
+	font-weight: bold;
+}
+
+table #box-content .nick-change-message
+{
+	color: #080;
+}
+
+table #box-content .message-alternative,
+table #box-content .join-message-alternative,
+table #box-content .leave-message-alternative,
+table #box-content .nick-change-message-alternative
+{
+	background-color: #f5f5f5;
+}
+
+table #box-content .message a
+{
+	color: #04c;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+table #box-content .message a:hover
+{
+	color: #06f;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+table #box-content .message .nick a,
+table #box-content .join-message .nick a,
+table #box-content .nick-change-message .nick a
+{
+	font-weight: bold;
+	text-decoration: none;
+}
+
+table #box-content .message .nick a:hover,
+table #box-content .join-message .nick a:hover,
+table #box-content .nick-change-message .nick a:hover
+{
+	text-decoration: underline;
+}
+
+table #box-content .message img
+{
+	vertical-align: middle;
+}
+
+/**
+ * Nick Cell
+ */
+
+table td.cell-nick
+{
+	background-color: #eff0fc;
+	width: 15%;
+}
+
+table #box-nick
+{
+	background: transparent url(../images/default/nick-box-bottom.gif) repeat-x 0 100%;
+	border-right: 0.1em solid #99c;
+	border-left: 0.1em solid #99c;
+	height: 2em;
+}
+
+table #box-nick .wrapper
+{
+	padding: 0.1em 0.2em 0.1em 0.2em;
+}
+
+table #box-nick #nick
+{
+	background-color: #eff0fc;
+	border: none;
+	color: #7773b0;
+	font: bold 0.9em tahoma, verdana, arial, serif;
+	height: 1.8em;
+	width: 100%;
+}
+
+/**
+ * Users List Cell
+ */
+
+table #box-users
+{
+	border-right: 0.1em solid #99c;
+	border-bottom: 0.1em solid #99c;
+	border-left: 0.1em solid #99c;
+	height: 33em;
+	overflow: auto;
+}
+
+table #box-users .wrapper
+{
+	margin: 0;
+	padding: 0.5em;
+}
+
+table #box-users .nick
+{
+	font-size: 0.9em;
+	padding-bottom: 0.25em;
+	white-space: nowrap;
+}
+
+table #box-users .nick a
+{
+	color: #000;
+	text-decoration: none;
+}
+
+table #box-users .nick a:hover
+{
+	color: #777;
+	text-decoration: underline;
+}
+
+/**
+ * Message Cell
+ */
+
+table #box-message .wrapper
+{
+	padding: 0.75em 0.5em 0.25em 0.5em;
+}
+
+table #box-message #message
+{
+	background-color: #ffe;
+	border: 0.1em solid #cca;
+	color: #000;
+	font: normal 1em tahoma, verdana, arial, serif;
+	width: 100%;
+}
+
+/**
+ * Actions Cell
+ */
+
+table #box-actions .wrapper
+{
+	padding: 0.75em 0.5em 0.25em 0.5em;
+}
+
+table #box-actions #color
+{
+	background-color: #fff;
+	border: 0.1em solid #cca;
+	color: #000;
+	font: normal 1em tahoma, verdana, arial, serif;
+	width: 75%;
+}

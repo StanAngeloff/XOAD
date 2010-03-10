@@ -18,7 +18,7 @@ And more:
 Tutorial
 --------
 
-XOAD's tutorial (as seen in `docs/tutorials/`) is [available online](http://stanangeloff.github.com/XOAD/).
+XOAD's tutorial (as seen in `docs/tutorials/`) is [available online](http://stanangeloff.github.com/XOAD/). Note the class reference is not available online and is part of the download only.
 
 NOTE on XOAD's license:
 ----------------------
@@ -35,7 +35,7 @@ http://www.php.net/license/3_0.txt
 XOAD comes with cssQuery:
 
 - [dean.edwards.name/my/cssQuery/](http://dean.edwards.name/my/cssQuery/)
-- [creativecommons.org/licenses/LGPL/2.1/](creativecommons.org/licenses/LGPL/2.1/)
+- [creativecommons.org/licenses/LGPL/2.1/](http://creativecommons.org/licenses/LGPL/2.1/)
    or
   [LICENSE.cssQuery](http://github.com/StanAngeloff/XOAD/blob/master/LICENSE.cssQuery)
 

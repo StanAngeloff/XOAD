@@ -18,8 +18,8 @@ http://www.php.net/license/3_0.txt
 
 XOAD comes with cssQuery:
 
-- http://dean.edwards.name/my/cssQuery/
-- http://creativecommons.org/licenses/LGPL/2.1/
+- [dean.edwards.name/my/cssQuery/](http://dean.edwards.name/my/cssQuery/)
+- [creativecommons.org/licenses/LGPL/2.1/](creativecommons.org/licenses/LGPL/2.1/)
    or
-  LICENSE.cssQuery
+  [LICENSE.cssQuery](http://github.com/StanAngeloff/XOAD/blob/master/LICENSE.cssQuery)
 

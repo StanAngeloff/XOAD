@@ -15,6 +15,11 @@ And more:
  - each class, method and variable is documented,
  - easy tutorials to get started using XOAD.
 
+Tutorial
+--------
+
+XOAD's tutorial (as seen in `docs/tutorials/`) is [available online](http://stanangeloff.github.com/XOAD/).
+
 NOTE on XOAD's license:
 ----------------------
 

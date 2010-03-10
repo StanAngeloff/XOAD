@@ -1,8 +1,19 @@
-XOAD
-====
+XOAD is a PHP based AJAX/XAP object oriented framework that allows you to create richer web applications.
+ 
+XOAD, formerly known as NAJAX, has many benefits:
 
-XOAD is a PHP based AJAX/XAP object oriented framework that allows you to create richer web applications. Formerly known as NAJAX, XOAD has many benefits: it uses JSON, supports server / client side events, HTML manipulation, Caching and many more.
+ - it uses JSON and native PHP serialized objects to communicate,
+ - special attention has been paid to security,
+ - supports server side events (observation),
+ - client side events (XOAD Events),
+ - server and client extensions,
+ - HTML manipulation (extension),
+ - Caching (extension).
+ 
+And more:
 
+ - each class, method and variable is documented,
+ - easy tutorials to get started using XOAD.
 
 NOTE on XOAD's license:
 ----------------------

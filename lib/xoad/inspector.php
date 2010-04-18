@@ -60,14 +60,15 @@ final class XOAD_Inspector extends XOAD_EventEmitter
 
             $class_namespace = $class_reflection->getNamespaceName();
             if (strlen($class_namespace)) {
-                $top_node = $namespace_node = XOAD_NamespaceNode::instance($class_namespace);
-                $class_node = $namespace_node->add_child(XOAD_ClassNode::instance($class_reflection->getShortName(), $extends));
-            } else {
-                $top_node = $class_node = XOAD_ClassNode::instance($class_reflection->getShortName(), $extends);
+                $top_node = XOAD_NamespaceNode::instance($class_namespace);
             }
+        }
 
+        $class_node = XOAD_ClassNode::instance($class_reflection->getName(), $extends);
+        if (isset ($top_node)) {
+            $top_node->add_child($class_node);
         } else {
-            $top_node = $class_node = XOAD_ClassNode::instance($class_reflection->getName(), $extends);
+            $top_node = $class_node;
         }
 
         if ( ! in_array($top_node, $nodes)) {
@@ -88,9 +89,6 @@ final class XOAD_Inspector extends XOAD_EventEmitter
                 $method_node = $class_node->add_child(XOAD_MethodNode::instance($method_name, $method->isStatic()));
                 $method_parameters = $method->getParameters();
                 foreach ($method_parameters as $parameter) {
-                    if ($parameter->isOptional()) {
-                        break;
-                    }
                     $method_node->add_child(XOAD_ArgumentNode::instance($parameter->getName()));
                 }
             }

@@ -25,6 +25,15 @@ abstract class XOAD_Node
     }
 
     /** @return  XOAD_Node */
+    public function add_children(array $children)
+    {
+        foreach ($children as $child) {
+            $this->add_child($child);
+        }
+        return $this;
+    }
+
+    /** @return  XOAD_Node */
     public function remove_child(XOAD_Node $child)
     {
         $index = array_search($child, $this->children);
@@ -34,6 +43,15 @@ abstract class XOAD_Node
         }
 
         return $child;
+    }
+
+    /** @return  XOAD_Node */
+    public function remove_children(array $children)
+    {
+        foreach ($children as $child) {
+            $this->remove_child($child);
+        }
+        return $this;
     }
 
     /** @return  XOAD_Node */
@@ -171,9 +189,14 @@ final class XOAD_ClassNode extends XOAD_Node
         return $nodes[$name];
     }
 
-    public function get_name()
+    public function get_name_parts()
     {
-        return $this->name;
+        return explode('\\', $this->name);
+    }
+
+    public function get_short_name()
+    {
+        return end($this->get_name_parts());
     }
 
     public function has_parent()

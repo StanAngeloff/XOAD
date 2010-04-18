@@ -8,22 +8,30 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
         if ($context === null) {
             $context = new XOAD_JavascriptContext();
         }
+
+        $context->output->descend();
         $this->stringify_nodes($nodes, $context);
 
         if (func_num_args() > 2) {
             $indent = func_get_arg(2);
         } else {
-            $indent = '  ';
+            $indent = XOAD_DEFAULT_INDENT;
         }
 
         if ( ! $context->scope->temporaries->is_empty()) {
             $context->output->unshift('var ' . implode(', ', $context->scope->temporaries->get_sorted()) . ";\n");
+            if ($context->scope->temporaries->has('__invoke')) {
+                $this->add_invoke_body($context);
+            }
+            if ($context->scope->temporaries->has('__slice')) {
+                $this->add_slice_body($context);
+            }
         }
-        $context->output->unshift("(function() {\n");
+        $context->output->ascend()->unshift("(function () {\n")->descend();
         if ( ! $context->scope->variables->is_empty()) {
-            $context->output->unshift('var ' . implode(', ', $context->scope->variables->get_sorted()) . ";\n");
+            $context->output->ascend()->unshift('var ' . implode(', ', $context->scope->variables->get_sorted()) . ";\n")->descend();
         }
-        $context->output->push('}).call(this);');
+        $context->output->ascend()->push('}.call(this));');
 
         return $context->output->join($indent);
     }
@@ -62,14 +70,14 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
 
     private function stringify_class(XOAD_ClassNode $node, XOAD_JavascriptContext $context)
     {
-        $class_name = $node->get_name();
+        $class_name = $node->get_short_name();
         $context_namespace = $context->namespace->get_current();
 
         if ($context->namespace->is_global()) {
             $context->scope->variables->add($class_name);
         } else {
             $context->scope->temporaries->add($class_name);
-            $context->output->push("$context_namespace.$class_name = (function() {\n")->descend();
+            $context->output->push("$context_namespace.$class_name = (function () {\n")->descend();
         }
 
         $constructor_arguments_list = array();
@@ -82,9 +90,10 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
         }
         $constructor_arguments = implode(', ', $constructor_arguments_list);
 
-        $context->output->push("$class_name = function $class_name($constructor_arguments) {")->descend();
-        $context->output->push('// TODO: invoke constructor');
-        $context->output->ascend()->push("};\n");
+        $context->output
+        ->push("$class_name = function $class_name($constructor_arguments) {")->descend()
+        ->push('this.__constructor = __slice.call(arguments);')
+        ->ascend()->push("};\n");
 
         if ($node->has_parent()) {
 
@@ -96,10 +105,11 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
 
             $context->scope->temporaries->add('__constructor');
 
-            $context->output->push('__constructor = function() {};');
-            $context->output->push("__constructor.prototype = $parent_class.prototype;");
-            $context->output->push("$class_name.prototype = new __constructor();");
-            $context->output->push("$class_name.prototype.constructor = $class_name;\n");
+            $context->output
+            ->push('__constructor = function () {};')
+            ->push("__constructor.prototype = $parent_class.prototype;")
+            ->push("$class_name.prototype = new __constructor();")
+            ->push("$class_name.prototype.constructor = $class_name;\n");
         }
 
         $context->replace_namespace(new XOAD_JavascriptNamespace("$class_name.prototype"));
@@ -107,8 +117,9 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
         $context->restore_namespace();
 
         if ( ! $context->namespace->is_global()) {
-            $context->output->push("return $class_name;");
-            $context->output->ascend()->push("})();\n");
+            $context->output
+            ->push("return $class_name;")
+            ->ascend()->push("}());\n");
         }
     }
 
@@ -121,6 +132,9 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
                 $namespace_part = $context->namespace->pop();
             }
             $context_namespace = $context->namespace->get_current();
+            $class_name = implode('\\\\', $node->get_parent()->get_name_parts());
+
+            $context->scope->temporaries->add('__invoke')->add('__slice');
 
             $arguments_list = array();
             foreach ($node->get_children() as $child) {
@@ -128,9 +142,10 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
             }
             $arguments = implode(', ', $arguments_list);
 
-            $context->output->push("$context_namespace.$method_name = function $method_name($arguments) {")->descend();
-            $context->output->push('// TODO: invoke method');
-            $context->output->ascend()->push("};\n");
+            $context->output
+            ->push("$context_namespace.$method_name = function $method_name($arguments) {")->descend()
+            ->push("__invoke('$class_name', " . ($node->is_static() ? 'null' : 'this') . ", '$method_name', __slice.call(arguments));")
+            ->ascend()->push("};\n");
 
             if ($node->is_static()) {
                 $context->namespace->push($namespace_part);
@@ -152,6 +167,53 @@ final class XOAD_JavascriptSerializer extends XOAD_Serializer
         if ($node->is_static()) {
             $context->namespace->push($namespace_part);
         }
+    }
+
+    private function add_invoke_body(XOAD_JavascriptContext $context)
+    {
+        $context->output
+        ->push('__invoke = function __invoke(className, classObj, methodName, methodArgs) {')->descend()
+        ->push('var callback, err, params, request, response;')
+        ->push("callback = (methodArgs.length && typeof methodArgs[methodArgs.length - 1] === 'function' ? methodArgs.pop() : null);")
+        ->push(
+            "params = { 'class': className, " .
+                        'method: methodName, ' .
+                        'state: (classObj ? classObj.__getState ? classObj.__getState : classObj : null), ' .
+                        "'arguments': methodArgs };")
+        ->push('request = new XMLHttpRequest();')
+        ->push("request.open('POST', window.location.href /* TODO: make configurable */, callback ? true : false);")
+        ->push('if (callback) {')->descend()
+        ->push('request.onreadystatechange = function () {')->descend()
+        ->push('if (request.readyState === 4) {')->descend()
+        ->push('try {')->descend()
+        ->push('response = JSON.parse(request.responseText);')
+        ->push("if (typeof response === 'object') {")->descend()
+        ->push('if (response.message) {')->descend()
+        ->push('err = { code: response.code || request.status, message: response.message };')
+        ->ascend()->push('} else if (request.status === 200) {')->descend()
+        ->push('// TODO:')
+        ->ascend()->push('} else {')->descend()
+        ->push('err = { code: request.status, message: response.responseText };')
+        ->ascend()->push('}')
+        ->ascend()->push('} else {')->descend()
+        ->push("err = { code: request.status, message: '__invoke did not understand the response.' };")
+        ->ascend()->push('}')
+        ->ascend()->push('} catch (e) {')->descend()
+        ->push('err = { code: request.status, message: e.message || e.toString(), exception: e };')
+        ->ascend()->push('}')
+        ->push('callback(err, response);')
+        ->ascend()->push('}')
+        ->ascend()->push('};')
+        ->push("request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');")
+        ->push("request.setRequestHeader('X-Requested-With', 'XOAD');")
+        ->push('request.send(JSON.stringify(params));')
+        ->ascend()->push('}')
+        ->ascend()->push("};\n");
+    }
+
+    private function add_slice_body(XOAD_JavascriptContext $context)
+    {
+        $context->output->push("__slice = Array.prototype.slice;\n");
     }
 }
 
@@ -258,12 +320,18 @@ final class XOAD_JavascriptScopeContainer
 {
     private $bag = array();
 
+    /** @var  XOAD_JavascriptScopeContainer */
     public function add($name)
     {
-        if ( ! in_array($name, $this->bag)) {
+        if ( ! $this->has($name)) {
             $this->bag[] = $name;
         }
         return $this;
+    }
+
+    public function has($name)
+    {
+        return in_array($name, $this->bag);
     }
 
     public function is_empty()
